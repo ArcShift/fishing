@@ -1,7 +1,7 @@
 <?php
-$berat= array();
+$berat= array(0,0,0,0,0,0,0,0,0,0,0,0);
 foreach ($data as $d) {
-    array_push($berat, $d['jumlah_berat']);
+    $berat[$d['bulan_id']-1]= $d['jumlah_berat'];
 }
 ?>
 <div class="panel no-rounded-corner bg-inverse text-white wrapper m-b-0">
