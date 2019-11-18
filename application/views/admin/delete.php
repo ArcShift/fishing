@@ -18,7 +18,7 @@
     </div>
     <div class="panel-footer">
         <form method="post">
-            <a class="btn btn-primary" href="<?php echo site_url('admin') ?>">KEMBALI</a>
+            <a class="btn btn-primary" href="<?php echo site_url($module) ?>">KEMBALI</a>
             <button class="btn btn-danger pull-right" name="delete" value="<?php echo $data['id']?>">HAPUS</button>
         </form>
     </div>

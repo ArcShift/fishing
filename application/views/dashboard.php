@@ -1,10 +1,10 @@
 <!--WIDGET-->
 <?php
 $widgets = array(
+    array("module"=>"user","title"=> "User", "color"=>"success", "icon"=>"user-secret", "value"=>$countAdmin, "note"=>"-", "progress"=>50, "url"=>"admin"),
     array("module" => "nelayan","title"=> "Nelayan", "color"=>"primary", "icon"=>"user", "value"=>$countFisherman, "note"=>"-","progress"=>50, "url"=>"nelayan"),
-    array("module"=>"admin","title"=> "Admin", "color"=>"success", "icon"=>"user-secret", "value"=>$countAdmin, "note"=>"-", "progress"=>50, "url"=>"admin"),
     array("module" => "ikan","title"=> "Database Ikan", "color"=>"grey", "icon"=>"fish", "value"=>$countFish, "note"=>"-","progress"=>50, "url"=>"ikan"),
-    array("module" => "pengaduan","title"=> "Pengaduan", "color"=>"inverse-dark", "icon"=>"phone-volume", "value"=>$countPengaduan, "note"=>"Tertangani ".($countPengaduan/100*80), "progress"=>(80), "url"=>"pengaduan"),    
+    array("module" => "pengaduan","title"=> "Pengaduan", "color"=>"inverse-dark", "icon"=>"phone-volume", "value"=>$countPengaduan, "note"=>"Tertangani ".$countPengaduanTertangani, "progress"=>(80), "url"=>"pengaduan"),    
 );
 ?>
 <div class="row">
@@ -24,7 +24,7 @@ $widgets = array(
                     </div>
                 </div>
                 <div class="widget-stat-footer text-left">
-                    <a class="btn btn-default fa fa-search" href="<?php echo site_url($w['url'])?>"></a>
+                    <a class="btn btn-default fa fa-search" href="<?php echo site_url($w['module'])?>"></a>
                     &nbsp;&nbsp;<?php echo $w['note']?>
                 </div>
             </div>

@@ -7,11 +7,10 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Source Admin | Dashboard v2</title>
+        <title>Fisherman</title>
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
         <meta content="" name="description" />
         <meta content="" name="author" />
-
         <!-- ================== BEGIN BASE CSS STYLE ================== -->
         <link href="<?php echo base_url() ?>assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
         <link href="<?php echo base_url() ?>assets/plugins/bootstrap/bootstrap-4.1.1/css/bootstrap.min.css" rel="stylesheet" />
@@ -96,18 +95,10 @@
                                 <span class="hidden-xs"><?php echo $this->session->userdata('user') ?></span> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="<?php echo site_url('admin/profile') ?>">Edit Profile</a></li>
-<!--                                <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
-                                <li><a href="javascript:;">Calendar</a></li>
-                                <li><a href="javascript:;">Setting</a></li>-->
+                                <li><a href="<?php echo site_url('user/profile') ?>">Edit Profile</a></li>
                                 <li class="divider"></li>
                                 <li><a href="<?php echo site_url('login/logout') ?>">Log Out</a></li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" data-click="right-sidebar-toggled">
-                                <i class="fa fa-align-left"></i>
-                            </a>
                         </li>
                     </ul>
                     <!-- end navbar-right -->
@@ -144,7 +135,7 @@
                         <li class="nav-header">Navigation</li>
                         <?php
                         $modules = array(
-                            array("id" => "adm", "nama" => "admin", "url" => "admin", "icon" => "user-secret"),
+                            array("id" => "adm", "nama" => "user", "url" => "user", "icon" => "user-secret"),
                             array("id" => "fsrm", "nama" => "nelayan", "url" => "nelayan", "icon" => "user"),
                             array("id" => "map", "nama" => "peta", "url" => "peta", "icon" => "map-marked"),
                             array("id" => "fish", "nama" => "ikan", "url" => "ikan", "icon" => "fish"),
@@ -203,7 +194,6 @@
                     </div>
                 <?php } ?>
                 <?php $this->load->view($view) ?>
-
                 <!-- begin #footer -->
                 <div id="footer" class="footer">
                     <span class="pull-right">
@@ -216,36 +206,6 @@
                 <!-- end #footer -->
             </div>
             <!-- end #content -->
-
-            <!-- begin #sidebar-right -->
-            <div id="sidebar-right" class="sidebar sidebar-right">
-                <!-- begin sidebar scrollbar -->
-                <div data-scrollbar="true" data-height="100%">
-                    <!-- begin sidebar-nav -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="width-half"><a class="active" href="#today" data-toggle="tab">Today</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="today">
-                            <ul class="nav">
-                                <li class="nav-date">
-                                    Sunday, May 31 st
-                                </li>
-                                <li class="divider"></li>
-                                <li class="divider"></li>
-                                <li class="divider"></li>
-                                <li class="nav-header">Calendar</li>
-                                <li>
-                                    <div id="schedule-calendar"></div>
-                                </li>
-                                <li class="divider"></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- end sidebar-nav -->
-                </div>
-                <!-- end sidebar scrollbar -->
-            </div>
             <div class="sidebar-bg sidebar-right"></div>
             <!-- end #sidebar-right -->
         </div>

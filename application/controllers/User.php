@@ -1,8 +1,8 @@
 <?php
 
-class Admin extends MY_Controller {
+class User extends MY_Controller {
 
-    protected $module = "admin";
+    protected $module = "user";
 
     public function __construct() {
         parent::__construct();
@@ -40,7 +40,7 @@ class Admin extends MY_Controller {
             if ($this->form_validation->run()) {
                 if ($this->model->create()) {
                     $this->session->set_flashdata('msgSuccess', 'Data berhasil disimpan');
-                    redirect('/admin');
+                    redirect($this->module);
                 } else {
                     $this->session->set_flashdata('msgError', 'Insert data gagal');
                 }
@@ -86,7 +86,7 @@ class Admin extends MY_Controller {
         } else if ($this->input->post('update')) {
             if ($this->model->update()) {
                 $this->session->set_flashdata('msgSuccess', 'Berhasil mengupdate data');
-                redirect('admin');
+                redirect($this->module);
             } else {
                 $this->data['data'] = $this->model->detail($this->input->post('id'));
             }
@@ -96,14 +96,14 @@ class Admin extends MY_Controller {
             if ($this->form_validation->run()) {
                 if ($this->model->gantiPassword()) {
                     $this->session->set_flashdata('msgSuccess', 'Password berhasil diganti');
-                    redirect('admin');
+                    redirect($this->module);
                 } else {
                     $this->session->set_flashdata('msgError', 'Gagal mengganti password');
                 }
             }
             $this->data['data'] = $this->model->detail($this->input->post('id'));
         } else {
-            redirect('admin');
+            redirect($this->module);
         }
         $this->subTitle = "Edit";
         $this->render('admin/edit');
@@ -119,13 +119,13 @@ class Admin extends MY_Controller {
                 $this->session->set_flashdata('msgError', 'Tidak bisa menghapus data anda sendiri');
             } elseif ($this->model->delete($id)) {
                 $this->session->set_flashdata('msgSuccess', 'Berhasil menghapus data');
-                redirect('admin');
+                redirect($this->module);
             } else {
                 $this->session->set_flashdata('msgError', 'Gagal menghapus data');
                 $this->data['data'] = $this->model->detail($id);
             }
         } else {
-            redirect('/admin');
+            redirect($this->module);
         }
         $this->render("admin/delete");
     }

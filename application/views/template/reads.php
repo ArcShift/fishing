@@ -1,8 +1,5 @@
 <?php
 $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
-//echo $this->db->last_query();
-//print_r($config['filter_query']);
-//print_r($this->input->post());
 ?>
 <form method="post">
     <div class="panel panel-default">
@@ -10,7 +7,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
             <?php if (isset($config['filter'])) { ?>
                 <div class="row">
                     <?php foreach ($config['filter'] as $f) { ?>
-                        <div class="col-sm-5">
+                        <div class="col-sm-5 m-b-10">
                             <?php if ($f['type'] == 'input') { ?>
                                 <input class="form-control" name="<?php echo $f['title'] ?>" placeholder="<?php echo ucfirst($f['title']) ?>" value="<?php echo $this->input->post($f['title']) ?>">
                             <?php } ?>
@@ -45,7 +42,6 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                 </div>
                 <div class="col-sm-10">
                 </div>
-
             </div>
         </div>
         <div class="panel-body">

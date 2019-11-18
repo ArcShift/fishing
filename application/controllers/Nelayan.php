@@ -22,7 +22,7 @@ class Nelayan extends MY_Controller {
             array("title" => "username", "field" => "n.username"),
             array("title" => "email", "field" => "n.email"),
         );
-        $config['crud'] = array('read', 'delete');
+        $config['crud'] = array('read');
         parent::reads($config);
     }
 

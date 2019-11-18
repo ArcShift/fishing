@@ -12,10 +12,10 @@ class MY_Controller extends CI_Controller {
         //Finding => Peta/ pengaduan
         //Catch => tangkapan
 //        "Super Admin" => array('dashboard', 'admin'),//Super Admin
-        "Super Admin" => array('dashboard', 'admin', 'nelayan', 'ikan', 'pengaduan', 'tangkapan'), //Test
+        "Super Admin" => array('dashboard', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan'), //Test
         "Admin Perikanan" => array('dashboard', 'nelayan', 'ikan', 'p', 'peta', 'tangkapan'), //Admin Perikanan
-        "Supervisor Bappeda" => array('dashboard', 'admin'), //Admin Perikanan
-        "Supervisor Perikanan" => array('dashboard', 'admin')//Admin Perikanan
+        "Supervisor Bappeda" => array('dashboard', 'user'), //Admin Perikanan
+        "Supervisor Perikanan" => array('dashboard', 'user')//Admin Perikanan
     );
 
     public function __construct() {

@@ -19,7 +19,7 @@
                     </select>
                 </div>
             </div>
-            <a href="<?php echo site_url('admin') ?>" class="btn btn-primary">Kembali</a>
+            <a href="<?php echo site_url($module) ?>" class="btn btn-primary">Kembali</a>
             <button type="submit" name="update" value="ok" class="btn btn-primary pull-right">Simpan</button>
         </form>
     </div>
