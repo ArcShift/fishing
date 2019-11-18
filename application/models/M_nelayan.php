@@ -18,8 +18,11 @@ class M_nelayan extends CI_Model {
     }
 
     public function read($id) {
-        $this->db->where('id', $id);
-        return $this->db->get($this->table)->result_array()[0];
+        $this->db->select('f.name, f.email, f.phone_number, COUNT(fp.id) AS postingan, f.bio, f.username, f.url_photo');
+        $this->db->where('f.id', $id);
+        $this->db->join('fisherman_post fp','fp.id_fisherman = f.id','left');
+        $this->db->group_by('f.id');
+        return $this->db->get($this->table." f")->row_array();
     }
 
 }

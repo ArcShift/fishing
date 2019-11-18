@@ -11,4 +11,5 @@
         minZoom: 6
         
     });
+    console.log(map);
 </script>
