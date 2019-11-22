@@ -6,9 +6,15 @@ $status = array('pending', 'diterima', 'ditolak', 'sedang ditangani', 'selesai')
         <div class="panel-body">
             <div class="form-group">
                 <input value="<?php echo $dataLaporan['id'] ?>" name="id" hidden=""/>
-                <label class="col-sm-2 col-form-label">Keterangan</label>
+                <label class="col-sm-2 col-form-label">Nelayan</label>
                 <div class="col-sm-10">
                     <input class="form-control" value="<?php echo $dataLaporan['name'] ?>" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="<?php echo $dataLaporan['title'] ?>" readonly/>
                 </div>
             </div>
             <div class="form-group">

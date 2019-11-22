@@ -36,6 +36,11 @@ class Pengaduan extends MY_Controller {
 
     public function detail() {
         $this->subTitle = 'Detail';
+        if (empty($this->session->flashdata('id'))) {
+            redirect($this->module);
+        }
+        $result = $this->model->read($this->session->flashdata('id'));
+        $this->data['dataLaporan'] = $result['main'];
         $this->render('pengaduan/detail');
     }
 
@@ -51,7 +56,7 @@ class Pengaduan extends MY_Controller {
             redirect($this->module);
         }
         $this->data['id'] = $this->session->flashdata('id');
-        $this->subTitle = 'Detail';
+        $this->subTitle = 'Edit';
         $result = $this->model->read($this->data['id']);
         $this->data['dataLaporan'] = $result['main'];
         $this->data['dataFiles'] = $result['files'];

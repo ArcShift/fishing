@@ -4,7 +4,7 @@ class M_pengaduan extends CI_Model {
 
     function read($id) {
         $result = array();
-        $this->db->select("fc.id, f.name,fc.description, fc.title, fc.status");
+        $this->db->select("f.name, fc.*");
         $this->db->where('fc.id', $id);
         $this->db->join('fisherman f', 'fc.id_fisherman= f.id');
         $result['main'] = $this->db->get('fisherman_complaintment fc')->row_array();
