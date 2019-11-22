@@ -47,8 +47,6 @@
         <script src="<?php echo base_url() ?>assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
         <script src="<?php echo base_url() ?>assets/plugins/chart-js/Chart.min.js"></script>
         <script src="<?php echo base_url() ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
-        <script src="<?php echo base_url() ?>assets/js/page-index-v2.demo.min.js"></script>
-        <script src="<?php echo base_url() ?>assets/js/demo.min.js"></script>
         <script src="<?php echo base_url() ?>assets/js/apps.min.js"></script>
         <!-- ================== END PAGE LEVEL JS ================== -->
         <script src="<?php echo base_url() ?>/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
@@ -59,8 +57,6 @@
         <script src="<?php echo base_url() ?>/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
         <script src="<?php echo base_url() ?>/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
         <script src="<?php echo base_url() ?>/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-        <script src="<?php echo base_url() ?>/assets/js/demo.min.js"></script>
-        <!--<script src="<?php // echo base_url() ?>/assets/js/page-index-v3.demo.min.js"></script>-->
         <script src="<?php echo base_url() ?>/assets/js/apps.min.js"></script>
         <!-- ================== END PAGE LEVEL JS ================== -->
 
@@ -213,8 +209,6 @@
         <script>
             $(document).ready(function () {
                 App.init();
-//                Demo.init();
-                PageDemo.init();
             });
         </script>
     </body>
