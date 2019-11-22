@@ -12,7 +12,11 @@ class Pengaduan extends MY_Controller {
     public function index() {
         $config['filter'] = array(
             array("title" => "nelayan", "type" => "input"),
-            array("title" => "keterangan", "type" => "input")
+            array("title" => "keterangan", "type" => "input"),
+            array("title" => "status", "type" => "array", "data" => array(
+                    'pending', 'diterima', 'ditolak', 'sedang ditangani', 'selesai'
+                )
+            )
         );
         $config['table'] = "fisherman_complaintment fc";
         $config['join'] = array(
@@ -20,12 +24,13 @@ class Pengaduan extends MY_Controller {
         );
         $config['column'] = array(
             array("title" => "nelayan", "field" => "f.name"),
-            array("title" => "keterangan", "field" => "fc.description"),
+            array("title" => "title", "field" => "fc.title"),
             array("title" => "latitude", "field" => "fc.latitude"),
             array("title" => "longitude", "field" => "fc.longitude"),
             array("title" => "status", "field" => "fc.status"),
         );
         $config['crud'] = array('read', 'update');
+        $this->db->order_by('fc.id', 'DESC');
         parent::reads($config);
     }
 
