@@ -16,11 +16,18 @@ class M_ikan extends CI_Model {
         return $result;
     }
 
+    function read($id) {
+        $this->db->where('id', $id);
+        return $this->db->get('fish')->row_array();
+    }
+
     function create() {
+//        $this->upload->data();
         $post = $this->input->post();
         $data = array(
             'name' => $post['nama'],
             'about_fish' => $post['keterangan'],
+            'url_photo' => $this->upload->data()['file_name'],
         );
         if ($this->db->insert('fish', $data)) {
             return true;

@@ -65,18 +65,15 @@ class MY_Controller extends CI_Controller {
         }
         if (isset($config['filter'])) {
             for ($i = 0; $i < count($config['filter']); $i++) {
-                if($config['filter'][$i]['type']=='select_query'){
-                    $config['filter'][$i]['result']=$this->db->query($config['filter'][$i]['query'])->result_array();
+                if ($config['filter'][$i]['type'] == 'select_query') {
+                    $config['filter'][$i]['result'] = $this->db->query($config['filter'][$i]['query'])->result_array();
                 }
             }
         }
-        
+
         if (isset($config['filter_query'])) {
             for ($i = 0; $i < count($config['filter_query']); $i++) {
                 $config['filter_query'][$i]['data'] = $this->db->query($config['filter_query'][$i]['query'])->result_array();
-            }
-            foreach ($config['filter_query'] as $k => $v) {
-                
             }
         }
         $this->session->set_userdata('pagination', $pagination);
