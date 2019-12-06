@@ -17,25 +17,44 @@ class Pengumuman extends MY_Controller {
             array("title" => "deskripsi", "field" => "a.sort_desc"),
             array("title" => "create", "field" => "a.created_at"),
         );
-        $config['crud'] = array('create');
+        $config['crud'] = array('create', 'delete');
         parent::reads($config);
     }
 
     public function create() {
-//        $config = array();
-//        $config['table'] = 'announcement';
-//        $config['input'] = array(
-//            array('id' => 'title', 'title' => 'id', 'field' => 'title', 'type' => 'hidden', 'value' => $this->session->userdata('id')),
-//            array('id' => 'title', 'title' => 'Judul', 'field' => 'title', 'type' => 'text'),
-//            array('id' => 'desc', 'title' => 'Keterangan Singkat', 'field' => 'sort_desc', 'type' => 'text'),
-//            array('id' => 'fullDesc', 'title' => 'Keterangan Lengkap', 'field' => 'full_desc', 'type' => 'textarea'),
-//            array('id' => 'gambar', 'title' => 'Gambar', 'field' => 'url_img', 'type' => 'file'),
-//        );
-//        parent::insert($config);
-        if($this->input->post('simpan')){
-            $this->model->create();
+        $this->subTitle = 'create';
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('judul', 'Judul', 'required');
+        $this->form_validation->set_rules('sortDesc', 'Deskripsi Singkat', 'required');
+        $this->form_validation->set_rules('fullDesc', 'Deskripsi Lengkap', 'required');
+        if (!$this->form_validation->run() == FALSE) {
+            if ($this->input->post('create')) {
+                if (parent::upload('pengumuman', 'foto')) {
+                    if($this->model->create()){
+                        redirect($this->module);
+                    }
+                }
+            }
         }
         $this->render('create');
+    }
+
+    public function delete() {
+        $this->subTitle = 'delete';
+        if (!empty($this->session->flashdata('id'))) {
+            $this->data['data'] = $this->model->read($this->session->flashdata('id'));
+            $this->render('delete');
+        } else if ($this->input->post('delete')) {
+            $id = $this->input->post('delete');
+            $data = $this->model->read($id);
+            if ($this->model->delete($id)) {
+                unlink($this->config->item('upload_path') . 'pengumuman/' . $data['url_img']);
+                $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
+                redirect($this->module);
+            }
+        } else {
+            redirect($this->module);
+        }
     }
 
 }
