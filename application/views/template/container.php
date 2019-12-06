@@ -117,7 +117,7 @@
                                 <div class="name dropdown">
                                     <a href="javascript:;" data-toggle="dropdown"><?php echo $this->session->userdata('user') ?><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="<?php echo site_url('admin/profile') ?>">Edit Profile</a></li>
+                                        <li><a href="<?php echo site_url('user/profile') ?>">Edit Profile</a></li>
 <!--                                        <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
                                         <li><a href="javascript:;">Calendar</a></li>
                                         <li><a href="javascript:;">Setting</a></li>-->
@@ -131,20 +131,21 @@
                         <li class="nav-header">Navigation</li>
                         <?php
                         $modules = array(
-                            array("id" => "adm", "nama" => "user", "url" => "user", "icon" => "user-secret"),
-                            array("id" => "fsrm", "nama" => "nelayan", "url" => "nelayan", "icon" => "user"),
-                            array("id" => "map", "nama" => "peta", "url" => "peta", "icon" => "map-marked"),
-                            array("id" => "fish", "nama" => "ikan", "url" => "ikan", "icon" => "fish"),
-                            array("id" => "cmpl", "nama" => "pengaduan", "url" => "pengaduan", "icon" => "phone-volume"),
-//                            array("id" => "", "nama" => "Findings", "url" => "", "icon"=>"cogs"),
-                            array("id" => "", "nama" => "tangkapan", "url" => "tangkapan", "icon" => "shopping-basket"),
-                            array("id" => "", "nama" => "peralatan", "url" => "", "icon" => "gear")
+                            array("id" => "adm", "nama" => "user", "icon" => "user-secret"),
+                            array("id" => "fsrm", "nama" => "nelayan", "icon" => "user"),
+                            array("id" => "map", "nama" => "peta", "icon" => "map-marked"),
+                            array("id" => "fish", "nama" => "ikan", "icon" => "fish"),
+                            array("id" => "cmpl", "nama" => "pengaduan", "icon" => "phone-volume"),//finding
+                            array("id" => "", "nama" => "tangkapan", "icon" => "shopping-basket"),
+//                            array("id" => "", "nama" => "peralatan", "icon" => "gear"),
+                            array("id" => "", "nama" => "pengumuman", "icon" => "bullhorn"),
+                            array("id" => "", "nama" => "dokumen", "icon" => "file")
                         );
                         ?>
                         <?php foreach ($modules as $m) { ?>
                             <?php if (in_array($m['nama'], $aksesModule)) { ?>
-                                <li class="<?php echo $m['url'] == $this->uri->segment(1) ? 'active' : '' ?>">
-                                    <a href="<?php echo site_url($m['url']) ?>">
+                                <li class="<?php echo $m['nama'] == $this->uri->segment(1) ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url($m['nama']) ?>">
                                         <i class="fa fa-<?php echo $m['icon'] ?>"></i>
                                         <span><?php echo ucfirst($m['nama']) ?></span>
                                     </a>

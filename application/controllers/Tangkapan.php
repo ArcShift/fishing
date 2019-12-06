@@ -17,7 +17,7 @@ class Tangkapan extends MY_Controller {
         } else {
             $this->data['data'] = $this->model->jumlah($this->data['tahun'][0]['tahun']);
         }
-        $this->render('tangkapan/grafik');
+        $this->render('grafik');
     }
 
 }

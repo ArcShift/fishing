@@ -41,7 +41,7 @@ class Pengaduan extends MY_Controller {
         }
         $result = $this->model->read($this->session->flashdata('id'));
         $this->data['dataLaporan'] = $result['main'];
-        $this->render('pengaduan/detail');
+        $this->render('detail');
     }
 
     public function edit() {
@@ -60,7 +60,7 @@ class Pengaduan extends MY_Controller {
         $result = $this->model->read($this->data['id']);
         $this->data['dataLaporan'] = $result['main'];
         $this->data['dataFiles'] = $result['files'];
-        $this->render('pengaduan/edit');
+        $this->render('edit');
     }
 
 }

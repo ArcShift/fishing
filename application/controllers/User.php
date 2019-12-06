@@ -46,7 +46,7 @@ class User extends MY_Controller {
                 }
             }
         }
-        $this->render("admin/create");
+        $this->render("create");
     }
 
     public function profile() {
@@ -77,7 +77,7 @@ class User extends MY_Controller {
             }
         }
         $this->data['data1'] = $this->model->detail($this->session->userId);
-        $this->render('admin/detail');
+        $this->render('detail');
     }
 
     public function edit() {
@@ -106,7 +106,7 @@ class User extends MY_Controller {
             redirect($this->module);
         }
         $this->subTitle = "Edit";
-        $this->render('admin/edit');
+        $this->render('edit');
     }
 
     public function delete() {
@@ -127,7 +127,7 @@ class User extends MY_Controller {
         } else {
             redirect($this->module);
         }
-        $this->render("admin/delete");
+        $this->render("delete");
     }
 
     function check_pass() {

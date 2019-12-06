@@ -1,6 +1,6 @@
 <?php
 $maxPage = floor((($dataCount - 1) / $this->config->item('page_limit'))) + 1;
-if ($maxPage != 1) {
+if ($maxPage > 1) {
     ?>
     <ul class="pagination pagination-sm inline">
         <li>

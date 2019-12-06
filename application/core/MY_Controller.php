@@ -12,7 +12,7 @@ class MY_Controller extends CI_Controller {
         //Finding => Peta/ pengaduan
         //Catch => tangkapan
 //        "Super Admin" => array('dashboard', 'admin'),//Super Admin
-        "Super Admin" => array('dashboard', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan'), //Test
+        "Super Admin" => array('dashboard', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'pengumuman', 'dokumen'), //Test
         "Admin Perikanan" => array('dashboard', 'nelayan', 'ikan', 'p', 'peta', 'tangkapan'), //Admin Perikanan
         "Supervisor Bappeda" => array('dashboard', 'user'), //Admin Perikanan
         "Supervisor Perikanan" => array('dashboard', 'user')//Admin Perikanan
@@ -29,11 +29,15 @@ class MY_Controller extends CI_Controller {
         $this->load->model("base_model", "b_model");
     }
 
-    protected function render($view) {
+    protected function render($view, $includeModule = true) {
         $this->data['module'] = $this->module;
         $this->data['subTitle'] = $this->subTitle;
-        $this->data['view'] = $view;
         $this->data['aksesModule'] = $this->aksesModule[$this->session->userdata('role')];
+        if ($includeModule) {
+            $this->data['view'] = $this->module . '/' . $view;
+        } else {
+            $this->data['view'] = $view;
+        }
         $this->load->view('template/container', $this->data);
     }
 
@@ -82,12 +86,37 @@ class MY_Controller extends CI_Controller {
         $this->data['config'] = $config;
         $this->data['dataCount'] = $result['count'];
         $this->data['data'] = $result['data'];
-        $this->render('template/reads');
+        $this->render('template/reads', false);
+    }
+
+    protected function insert($config) {
+        $this->subTitle = 'create';
+        $this->data['input'] = $config['input'];
+        if ($this->input->post('simpan')) {
+            $this->b_model->insert($config);
+        }
+        $this->render('template/create');
     }
 
     protected function delete() {
         $this->subTitle = "Delete";
         $this->render('template/delete');
+    }
+
+    protected function upload($folder, $input) {
+        $config['upload_path'] = $this->config->item('upload_path') . $folder;
+        $config['max_size'] = 5000000000000;
+        $config['max_width'] = 10000;
+        $config['max_height'] = 10000;
+        $config['allowed_types'] = '*';
+//        die(print_r($config));
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload($input)) {
+            $this->session->set_flashdata('msgError', $this->upload->display_errors());
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

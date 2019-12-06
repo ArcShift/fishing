@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<!--<div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
@@ -20,7 +20,7 @@
     <div class="panel-footer">
         <button class="btn btn-default">Tutup</button>
     </div>
-</div>
+</div>-->
 <!--WIDGET-->
 <?php
 $widgets = array(

@@ -32,9 +32,9 @@ class Nelayan extends MY_Controller {
             redirect('nelayan');
         }
         $this->data['data'] = $this->model->read($this->session->flashdata('id'));
-        $this->render('nelayan/read');
+        $this->render('read');
     }
     public function delete() {
-        $this->render($this->module.'/delete');
+        $this->render('delete');
     }
 }

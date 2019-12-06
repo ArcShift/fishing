@@ -11,7 +11,8 @@ class Base_model extends CI_Model {
                         if ($f['title'] == $c['title']) {
                             $this->db->like($c['field'], $this->input->post($f['title']));
                             if ($f['type'] == 'select_query') {//TODO: exact search query 
-                            } else if ($f['type'] == 'input') {                                
+                            } else if ($f['type'] == 'input') {
+                                
                             }
                         }
                     }
@@ -33,6 +34,15 @@ class Base_model extends CI_Model {
         $this->db->limit($limit, $offset);
         $result['data'] = $this->db->get()->result_array();
         return $result;
+    }
+
+    function insert($config) {
+//        die(print_r($input));
+//        die(print_r($this->input->post()));
+        foreach ($config['input'] as $in) {
+            $this->db->set($in['field'], $this->input->post($in['id']));
+        }
+        $this->db->insert($config['table']);
     }
 
 }

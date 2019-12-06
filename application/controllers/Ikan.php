@@ -19,21 +19,21 @@ class Ikan extends MY_Controller {
             array("title" => "keterangan", "field" => "about_fish"),
         );
 //        $config['crud'] = array('create', 'read', 'update', 'delete');
-        $config['crud'] = array('create', 'update');
+        $config['crud'] = array('create');
         $this->db->order_by('name', 'DESC');
         parent::reads($config);
     }
+
     public function edit() {
-        if($this->session->userdata('id')){
-            $id= $this->session->userdata('id');
-        }else{
+        if ($this->session->userdata('id')) {
+            $id = $this->session->userdata('id');
+        } else {
             redirect($this->module);
         }
-        $this->data['data']=$this->model->read($id);
-        $this->render('ikan/update');
-//        $this->render($this->module.'/update');
+        $this->data['data'] = $this->model->read($id);
+        $this->render('update');
     }
-    
+
     public function delete() {
         parent::delete();
     }
@@ -64,7 +64,7 @@ class Ikan extends MY_Controller {
                 }
             }
         }
-        $this->render("ikan/create");
+        $this->render("create");
     }
 
 }
