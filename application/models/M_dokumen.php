@@ -13,10 +13,10 @@ class M_dokumen extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->get('document')->row_array();
     }
+
     function delete($id) {
         $this->db->where('id', $id);
-        $this->db->delete('document');
-        //TODO delete file
+        return $this->db->delete('document');
     }
 
 }

@@ -1,7 +1,3 @@
-<?php 
-    print_r($data);
-    
-?>
 <div class="panel panel-danger">
     <div class="panel-heading">
         <h1 class="panel-title">Anda yakin akan menghapus data ini?</h1>

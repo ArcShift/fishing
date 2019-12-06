@@ -18,7 +18,7 @@ class Dokumen extends MY_Controller {
 //            array("title" => "longitude", "field" => "fc.longitude"),
 //            array("title" => "status", "field" => "fc.status"),
         );
-        $config['crud'] = array('create', 'update', 'delete');
+        $config['crud'] = array('create', 'delete');
         $config['table'] = 'document d';
         parent::reads($config);
     }
@@ -48,13 +48,20 @@ class Dokumen extends MY_Controller {
     }
 
     public function delete() {
+        $this->subTitle='delete';
         if (!empty($this->session->flashdata('id'))) {
             $this->data['data'] = $this->model->read($this->session->flashdata('id'));
-        $this->render('delete');
-        }else if($this->input->post('delete')){
-            if($this->model->delete($this->input->post('delete'))){
+            $this->render('delete');
+        } else if ($this->input->post('delete')) {
+            $id = $this->input->post('delete');
+            $data = $this->model->read($id);
+            if ($this->model->delete($id)) {
+                unlink($this->config->item('upload_path') . 'dokumen/' . $data['url']);
+                $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
                 redirect($this->module);
             }
+        } else {
+            redirect($this->module);
         }
     }
 
