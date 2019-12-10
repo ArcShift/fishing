@@ -109,7 +109,7 @@ class MY_Controller extends CI_Controller {
         $config['max_width'] = 10000;
         $config['max_height'] = 10000;
         $config['allowed_types'] = '*';
-//        die(print_r($config));
+        die(print_r($config));
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload($input)) {
             $this->session->set_flashdata('msgError', $this->upload->display_errors());
