@@ -1,7 +1,3 @@
-<?php
-//print_r($data);
-//echo base_url('upload/persebaran_ikan/'.$data['file']);
-?>
 <link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
 <link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
 <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
@@ -16,7 +12,6 @@
         <div class="panel panel-default" id='map' style='width: 100%; height: 72vh;'></div>
     </div>
 </div>
-
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
 <script>
@@ -28,30 +23,13 @@
         zoom: 9
     });
     map.on('load', function () {
-
-        /* Sample feature from the `examples.8fgz4egr` tileset:
-         {
-         "type": "Feature",
-         "properties": {
-         "ethnicity": "White"
-         },
-         "geometry": {
-         "type": "Point",
-         "coordinates": [ -122.447303, 37.753574 ]
-         }
-         }
-         */
         map.addLayer({
             'id': 'population',
             'type': 'circle',
             'source': {
-//                type: 'vector',
                 type: 'geojson',
-//                url: 'mapbox://examples.8fgz4egr'
-                data: '<?php echo base_url('upload/persebaran_ikan/'.$data['file'])?>'
-//                data: 'http://103.31.159.29/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3Aindonesia_zppi_1806&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature'
+                data: '<?php echo base_url('upload/persebaran_ikan/' . $data['file']) ?>'
             },
-//            'source-layer': 'sf2010',
             'paint': {
 // make circles larger as the user zooms from z12 to z22
                 'circle-radius': {

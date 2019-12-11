@@ -18,7 +18,7 @@ class Dokumen extends MY_Controller {
 //            array("title" => "longitude", "field" => "fc.longitude"),
 //            array("title" => "status", "field" => "fc.status"),
         );
-        $config['crud'] = array('create', 'delete');
+        $config['crud'] = array('create', 'read', 'delete');
         $config['table'] = 'document d';
         parent::reads($config);
     }
@@ -43,12 +43,20 @@ class Dokumen extends MY_Controller {
         $this->render('create');
     }
 
+    public function detail() {
+        if(!$this->session->flashdata('id')){
+            redirect($this->module);
+        }
+        $this->data['data']=$this->model->read($this->session->flashdata('id'));
+        $this->render('read');
+    }
+
     public function edit() {
         $this->render('update');
     }
 
     public function delete() {
-        $this->subTitle='delete';
+        $this->subTitle = 'delete';
         if (!empty($this->session->flashdata('id'))) {
             $this->data['data'] = $this->model->read($this->session->flashdata('id'));
             $this->render('delete');
