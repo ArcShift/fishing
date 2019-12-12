@@ -1,11 +1,55 @@
 <link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
 <link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
 <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<style>
+    #menu {
+        background: #fff;
+        position: absolute;
+        z-index: 1;
+/*        top: 10px;
+        right: 10px;*/
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #menu a {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+
+    #menu a:last-child {
+        border: none;
+    }
+
+    #menu a:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+
+    #menu a.active {
+        background-color: #3887be;
+        color: #ffffff;
+    }
+
+    #menu a.active:hover {
+        background: #3074a4;
+    }
+</style>
 <div class="row">
     <div class="col-sm-2 panel panel-default">
         <div class="panel-body">
-            <p>Update terakhir: <?php echo $data['date'] ?></p>
-            <a class="btn btn-primary" href="<?php echo site_url($module . '/data_persebaran') ?>">Update</a>
+<!--            <p>Update terakhir: <?php // echo $data['date']    ?></p>
+            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')    ?>">Update</a>-->
+        <nav id="menu"></nav>
         </div>
     </div>
     <div class="col-sm-10">
@@ -24,7 +68,7 @@
     });
     map.on('load', function () {
         map.addLayer({
-            'id': 'population',
+            'id': 'Lapan',
             'type': 'circle',
             'source': {
                 type: 'geojson',
@@ -49,5 +93,61 @@
                 ]
             }
         });
+        map.addLayer({
+            'id': 'Aplikasi Lain',
+            'type': 'circle',
+            'source': {
+                type: 'geojson',
+                data: 'https://spbn.pusfatja.lapan.go.id/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3An102019&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature'
+            },
+            'paint': {
+// make circles larger as the user zooms from z12 to z22
+                'circle-radius': {
+                    'base': 1.75,
+                    'stops': [[12, 2], [22, 180]]
+                },
+// color circles by ethnicity, using a match expression
+// https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+                'circle-color': [
+                    'match',
+                    ['get', 'ethnicity'],
+                    'White', '#fbb03b',
+                    'Black', '#223b53',
+                    'Hispanic', '#e55e5e',
+                    'Asian', '#3bb2d0',
+                    /* other */ '#ff0000'
+                ]
+            }
+        });
     });
+    //==================
+    var toggleableLayerIds = ['Lapan', 'Aplikasi Lain'];
+
+    for (var i = 0; i < toggleableLayerIds.length; i++) {
+        var id = toggleableLayerIds[i];
+
+        var link = document.createElement('a');
+        link.href = '#';
+        link.className = 'active';
+        link.textContent = id;
+
+        link.onclick = function (e) {
+            var clickedLayer = this.textContent;
+            e.preventDefault();
+            e.stopPropagation();
+
+            var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+            if (visibility === 'visible') {
+                map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+                this.className = '';
+            } else {
+                this.className = 'active';
+                map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+            }
+        };
+
+        var layers = document.getElementById('menu');
+        layers.appendChild(link);
+    }
 </script>
