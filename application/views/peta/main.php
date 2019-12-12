@@ -68,7 +68,7 @@
     });
     map.on('load', function () {
         map.addLayer({
-            'id': 'Lapan',
+            'id': 'Persebaran Ikan: LAPAN',
             'type': 'circle',
             'source': {
                 type: 'geojson',
@@ -94,7 +94,7 @@
             }
         });
         map.addLayer({
-            'id': 'Aplikasi Lain',
+            'id': 'Persebaran Ikan: Aplikasi Lain',
             'type': 'circle',
             'source': {
                 type: 'geojson',
@@ -119,9 +119,35 @@
                 ]
             }
         });
+        map.addLayer({
+            'id': 'Batas Perairan: Jawa Timur',
+            'type': 'line',
+            'source': {
+                type: 'geojson',
+                data: '<?php echo base_url('upload/batas_zona_perairan.geojson') ?>'
+            },
+            'paint': {
+// make circles larger as the user zooms from z12 to z22
+//                'line-radius': {
+//                    'base': 1.75,
+//                    'stops': [[12, 2], [22, 180]]
+//                },
+// color circles by ethnicity, using a match expression
+// https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+                'line-color': [
+                    'match',
+                    ['get', 'ethnicity'],
+                    'White', '#fbb03b',
+                    'Black', '#223b53',
+                    'Hispanic', '#e55e5e',
+                    'Asian', '#3bb2d0',
+                    /* other */ '#0000ff'
+                ]
+            }
+        });
     });
     //==================
-    var toggleableLayerIds = ['Lapan', 'Aplikasi Lain'];
+    var toggleableLayerIds = ['Persebaran Ikan: LAPAN', 'Persebaran Ikan: Aplikasi Lain', 'Batas Perairan: Jawa Timur'];
 
     for (var i = 0; i < toggleableLayerIds.length; i++) {
         var id = toggleableLayerIds[i];
@@ -146,7 +172,6 @@
                 map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
             }
         };
-
         var layers = document.getElementById('menu');
         layers.appendChild(link);
     }
