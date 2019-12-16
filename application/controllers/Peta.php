@@ -10,12 +10,12 @@ class Peta extends MY_Controller {
     }
 
     public function index() {
-        $this->data['data']= $this->model->get();
+        $this->data['data'] = $this->model->get();
         $this->render('main');
     }
 
     public function data_persebaran() {
-        $this->subTitle= 'Data Persebaran';
+        $this->subTitle = 'Data Persebaran';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required|is_unique[persebaran_ikan.date]');
         if (!$this->form_validation->run() == FALSE) {
@@ -28,6 +28,12 @@ class Peta extends MY_Controller {
             }
         }
         $this->render('data_persebaran');
+    }
+
+    public function pengaduan() {
+        $r = $this->model->pengaduan_json();
+        
+        print_r(json_encode($r));
     }
 
 }

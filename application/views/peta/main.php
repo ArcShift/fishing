@@ -4,10 +4,10 @@
 <style>
     #menu {
         background: #fff;
-        position: absolute;
+        /*position: absolute;*/
         z-index: 1;
-/*        top: 10px;
-        right: 10px;*/
+        /*        top: 10px;
+                right: 10px;*/
         border-radius: 3px;
         width: 120px;
         border: 1px solid rgba(0, 0, 0, 0.4);
@@ -43,13 +43,24 @@
     #menu a.active:hover {
         background: #3074a4;
     }
+    .marker {
+        background-image: url('https://pngriver.com/wp-content/uploads/2018/04/Download-Map-Marker-PNG-Image.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
 </style>
 <div class="row">
     <div class="col-sm-2 panel panel-default">
         <div class="panel-body">
-<!--            <p>Update terakhir: <?php // echo $data['date']    ?></p>
-            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')    ?>">Update</a>-->
-        <nav id="menu"></nav>
+<!--            <p>Update terakhir: <?php // echo $data['date']                  ?></p>
+            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')                  ?>">Update</a>-->
+            <nav id="menu"></nav>
+            <p>lat: <span id="lat"></span></p>
+            <p>long: <span id="long"></span></p>
         </div>
     </div>
     <div class="col-sm-10">
@@ -145,13 +156,30 @@
                 ]
             }
         });
+        //ADD MARKERS
+        $.getJSON('<?php echo site_url('peta/pengaduan') ?>', null, function (resp) {
+//            console.log(resp);
+            resp.forEach(function (item) {
+                console.log(item);
+                var el = document.createElement('div');
+                el.className = 'marker';
+                var marker=new mapboxgl.Marker(el, {
+                    offset: [0,-20]
+                })
+                        .setLngLat([item.longitude, item.latitude])
+                        .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
+                                .setHTML('<h3>' + item.title + '</h3><p>' + item.description + '</p>'))
+                        .addTo(map);
+//                marker.offset([0,0]);
+            });
+        });
+
     });
     //==================
     var toggleableLayerIds = ['Persebaran Ikan: LAPAN', 'Persebaran Ikan: Aplikasi Lain', 'Batas Perairan: Jawa Timur'];
 
     for (var i = 0; i < toggleableLayerIds.length; i++) {
         var id = toggleableLayerIds[i];
-
         var link = document.createElement('a');
         link.href = '#';
         link.className = 'active';
@@ -175,4 +203,11 @@
         var layers = document.getElementById('menu');
         layers.appendChild(link);
     }
+    map.on('click', function (e) {
+//    map.on('mousemove', function (e) {
+        var co = e.lngLat;
+        $("#lat").text(co.lat);
+        $("#long").text(co.lng);
+
+    });
 </script>
