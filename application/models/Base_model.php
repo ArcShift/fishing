@@ -2,7 +2,7 @@
 
 class Base_model extends CI_Model {
 
-    function reads($page, $data) {
+    function reads($pagination, $data) {
         $result = array();
         if (isset($data['filter'])) {
             foreach ($data['filter'] as $f) {
@@ -28,9 +28,13 @@ class Base_model extends CI_Model {
                 $this->db->join($j['table'], $j['relation']);
             }
         }
+        if(isset($pagination['sort'])){
+            $this->db->order_by($pagination['sort']);
+        }
+        
         $result['count'] = $this->db->count_all_results($data['table'], FALSE);
         $limit = $this->config->item('page_limit');
-        $offset = $limit * ($page - 1);
+        $offset = $limit * ($pagination['page'] - 1);
         $this->db->limit($limit, $offset);
         $result['data'] = $this->db->get()->result_array();
         return $result;

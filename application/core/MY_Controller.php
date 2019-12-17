@@ -22,11 +22,11 @@ class MY_Controller extends CI_Controller {
         parent::__construct();
         if (!$this->session->has_userdata('user')) {//cek login user
             redirect('login');
-        }
-        if (!in_array($this->module, $this->aksesModule[$this->session->userdata('role')])) {
+        } else if (!in_array($this->module, $this->aksesModule[$this->session->userdata('role')])) {
             die('no access');
+        } else {
+            $this->load->model("base_model", "b_model");
         }
-        $this->load->model("base_model", "b_model");
     }
 
     protected function render($view, $includeModule = true) {
@@ -43,18 +43,6 @@ class MY_Controller extends CI_Controller {
 
     protected function reads($config) {
         $this->subTitle = "List";
-        if ($this->input->post('read')) {
-            $this->session->set_flashdata('id', $this->input->post('read'));
-            redirect('/' . $this->module . '/detail');
-        }
-        if ($this->input->post('edit')) {
-            $this->session->set_flashdata('id', $this->input->post('edit'));
-            redirect('/' . $this->module . '/edit');
-        }
-        if ($this->input->post('initDelete')) {
-            $this->session->set_flashdata('id', $this->input->post('initDelete'));
-            redirect('/' . $this->module . '/delete');
-        }
         $pagination = array(
             "module" => $this->module,
             "page" => 1,
@@ -62,10 +50,22 @@ class MY_Controller extends CI_Controller {
         if ($this->module == $this->session->userdata('pagination')["module"]) {
             $pagination = $this->session->userdata('pagination');
         }
-        if ($this->input->post('page')) {
+        if ($this->input->post('read')) {
+            $this->session->set_flashdata('id', $this->input->post('read'));
+            redirect('/' . $this->module . '/detail');
+        } else if ($this->input->post('edit')) {
+            $this->session->set_flashdata('id', $this->input->post('edit'));
+            redirect('/' . $this->module . '/edit');
+        } else if ($this->input->post('initDelete')) {
+            $this->session->set_flashdata('id', $this->input->post('initDelete'));
+            redirect('/' . $this->module . '/delete');
+        } else if ($this->input->post('page')) {
             $pagination['page'] = $this->input->post('page');
         } else if ($this->input->post('cari')) {
             $pagination['page'] = 1;
+        } else if ($this->input->post('sort')) {
+            $key =array_search($this->input->post('sort'), array_column($config['column'], 'title'));
+            $pagination['sort']=  $config['column'][$key]['field'];
         }
         if (isset($config['filter'])) {
             for ($i = 0; $i < count($config['filter']); $i++) {
@@ -74,7 +74,6 @@ class MY_Controller extends CI_Controller {
                 }
             }
         }
-
         if (isset($config['filter_query'])) {
             for ($i = 0; $i < count($config['filter_query']); $i++) {
                 $config['filter_query'][$i]['data'] = $this->db->query($config['filter_query'][$i]['query'])->result_array();
@@ -82,7 +81,7 @@ class MY_Controller extends CI_Controller {
         }
         $this->session->set_userdata('pagination', $pagination);
         $this->data['pagination'] = $pagination;
-        $result = $this->b_model->reads($pagination['page'], $config);
+        $result = $this->b_model->reads($pagination, $config);
         $this->data['config'] = $config;
         $this->data['dataCount'] = $result['count'];
         $this->data['data'] = $result['data'];
@@ -109,7 +108,7 @@ class MY_Controller extends CI_Controller {
         $config['max_width'] = 10000;
         $config['max_height'] = 10000;
         $config['allowed_types'] = '*';
-        die(print_r($config));
+//        die(print_r($config));
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload($input)) {
             $this->session->set_flashdata('msgError', $this->upload->display_errors());

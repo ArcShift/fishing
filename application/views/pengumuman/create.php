@@ -28,7 +28,7 @@ $input = array(
             <div class="form-group <?php // echo form_error('username') != "" ? "has-error" : ""         ?>">
                 <label for="foto" class="col-sm-2 control-label">Foto</label>
                 <div class="col-sm-10">
-                    <input type="file" class="form-control" id="foto" name="foto" placeholder="Foto" value="<?php // echo $this->input->post('username')         ?>">
+                    <input type="file" class="form-control" id="foto" name="foto" placeholder="Foto" accept="image/*">
                     <span class="help-block"><?php // echo form_error('username');    ?></span>
                 </div>
             </div>

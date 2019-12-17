@@ -17,7 +17,6 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                                         <option value="<?php echo $r['v'] ?>"><?php echo $r['v'] ?></option>
                                     <?php } ?>
                                 </select>
-
                             <?php } else if ($f['type'] == 'array') { ?>
                                 <select class="form-control" name="<?php echo $f['title'] ?>">
                                     <option value="">-- <?php echo ucfirst($f['title']) ?> --</option>
@@ -57,7 +56,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                     <tr>
                         <th>No</th>
                         <?php foreach ($config['column'] as $c) { ?>
-                            <th><?php echo ucfirst($c['title']) ?></th>
+                            <th><?php echo ucfirst($c['title']) ?><button class="fa fa-sort<?php if (isset($pagination['sort'])) echo $c['field'] == $pagination['sort'] ? '-down' : '' ?> fa-sort" name="sort" value="<?php echo $c['title'] ?>"></button></th>
                         <?php } ?>
                         <th>Aksi</th>
                     </tr>
