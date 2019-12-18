@@ -13,7 +13,6 @@
         border: 1px solid rgba(0, 0, 0, 0.4);
         font-family: 'Open Sans', sans-serif;
     }
-
     #menu a {
         font-size: 13px;
         color: #404040;
@@ -51,13 +50,12 @@
         border-radius: 50%;
         cursor: pointer;
     }
-
 </style>
 <div class="row">
     <div class="col-sm-2 panel panel-default">
         <div class="panel-body">
-<!--            <p>Update terakhir: <?php // echo $data['date']                  ?></p>
-            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')                  ?>">Update</a>-->
+<!--            <p>Update terakhir: <?php // echo $data['date']                     ?></p>
+            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')                     ?>">Update</a>-->
             <nav id="menu"></nav>
             <p>lat: <span id="lat"></span></p>
             <p>long: <span id="long"></span></p>
@@ -130,7 +128,7 @@
                 ]
             }
         });
-        map.addLayer({
+        var lay = map.addLayer({
             'id': 'Batas Perairan: Jawa Timur',
             'type': 'line',
             'source': {
@@ -163,13 +161,13 @@
                 console.log(item);
                 var el = document.createElement('div');
                 el.className = 'marker';
-                var marker=new mapboxgl.Marker(el, {
-                    offset: [0,-20]
+                var marker = new mapboxgl.Marker(el, {
+                    offset: [0, -20]
                 })
                         .setLngLat([item.longitude, item.latitude])
                         .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
                                 .setHTML('<h3>' + item.title + '</h3><p>' + item.description + '</p>'))
-                        .addTo(map);
+                        .addTo(lay);
 //                marker.offset([0,0]);
             });
         });
@@ -177,7 +175,6 @@
     });
     //==================
     var toggleableLayerIds = ['Persebaran Ikan: LAPAN', 'Persebaran Ikan: Aplikasi Lain', 'Batas Perairan: Jawa Timur'];
-
     for (var i = 0; i < toggleableLayerIds.length; i++) {
         var id = toggleableLayerIds[i];
         var link = document.createElement('a');
@@ -208,6 +205,5 @@
         var co = e.lngLat;
         $("#lat").text(co.lat);
         $("#long").text(co.lng);
-
     });
 </script>
