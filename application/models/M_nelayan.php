@@ -28,14 +28,14 @@ class M_nelayan extends CI_Model {
         if($method == 'pengaduan'){
             $query = $this->db->query("SELECT fc.*, ff.url_file FROM fisherman_complaintment fc
                 LEFT JOIN fisherman_complaintment_files ff ON ff.id_fisherman_complaintment = fc.id
-                WHERE fc.id_fisherman = ?
+                WHERE fc.id_fisherman = ? ORDER BY fc.id DESC
             ", $id)->result_array();
 
             return $query;
         }
         if($method == 'postingan'){
             $query = $this->db->query("SELECT fp.* FROM fisherman_post fp
-                WHERE fp.id_fisherman = ?
+                WHERE fp.id_fisherman = ? ORDER BY fp.id DESC
             ", $id)->result_array();
 
             return $query;
@@ -43,7 +43,7 @@ class M_nelayan extends CI_Model {
         if($method == 'tangkapan ikan'){
             $query = $this->db->query("SELECT flc.*, f.name as fish_name FROM fisherman_log_catch_fish flc
                 LEFT JOIN fish f ON f.id = flc.id_fish
-                WHERE flc.id_fisherman = ?
+                WHERE flc.id_fisherman = ? ORDER BY flc.id DESC
             ", $id)->result_array();
 
             return $query;
@@ -53,21 +53,21 @@ class M_nelayan extends CI_Model {
     function get_pic($id, $method=null){
         if($method == 'complaint'){
             $query = $this->db->query("SELECT fcf.* FROM fisherman_complaintment_files fcf
-                WHERE fcf.id_fisherman_complaintment = ?
+                WHERE fcf.id_fisherman_complaintment = ? ORDER BY fcf.id DESC
             ", $id)->result_array();
 
             return $query;
         }
         if($method == 'catch'){
             $query = $this->db->query("SELECT flc.* FROM fisherman_log_catch_fish_files flc
-                WHERE flc.id_fisherman_log_catch_fish = ?
+                WHERE flc.id_fisherman_log_catch_fish = ? ORDER BY flc.id DESC
             ", $id)->result_array();
 
             return $query;
         }
         if($method == 'post'){
             $query = $this->db->query("SELECT fpf.* FROM fisherman_post_files fpf
-                WHERE fpf.id_fisherman_post = ?
+                WHERE fpf.id_fisherman_post = ? ORDER BY fpf.id DESC
             ", $id)->result_array();
 
             return $query;
@@ -77,7 +77,7 @@ class M_nelayan extends CI_Model {
     function get_cl_post($id, $method){
         if($method == 'like'){
             $query = $this->db->query("SELECT fpf.* FROM fisherman_post_likes fpf
-                WHERE fpf.id_fisherman_post = ?
+                WHERE fpf.id_fisherman_post = ? ORDER BY fpf.id DESC
             ", $id)->result_array();
 
             return $query;
@@ -85,7 +85,7 @@ class M_nelayan extends CI_Model {
 
         if($method == 'comment'){
             $query = $this->db->query("SELECT fpf.* FROM fisherman_post_comments fpf
-                WHERE fpf.id_fisherman_post = ?
+                WHERE fpf.id_fisherman_post = ? ORDER BY fpf.id DESC
             ", $id)->result_array();
 
             return $query;
@@ -93,7 +93,7 @@ class M_nelayan extends CI_Model {
 
         if($method == 'pic'){
             $query = $this->db->query("SELECT fpf.* FROM fisherman_post_files fpf
-                WHERE fpf.id_fisherman_post = ?
+                WHERE fpf.id_fisherman_post = ? ORDER BY fpf.id DESC
             ", $id)->result_array();
 
             return $query;
