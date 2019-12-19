@@ -77,7 +77,7 @@ class M_nelayan extends CI_Model {
     function get_cl_post($id, $method){
         if($method == 'like'){
             $query = $this->db->query("SELECT fpf.* FROM fisherman_post_likes fpf
-                WHERE fpf.id_fisherman_post = ? ORDER BY fpf.id DESC
+                WHERE fpf.id_fisherman_post = ? ORDER BY fpf.id_fisherman_post, fpf.id_fisherman DESC
             ", $id)->result_array();
 
             return $query;
