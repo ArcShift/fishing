@@ -28,10 +28,15 @@ class Nelayan extends MY_Controller {
 
     public function detail() {
         $this->subTitle = "Detail";
-        if (empty($this->session->flashdata('id'))) {
+        $id_nelayan = $this->session->userdata('id_nelayan'); 
+        if (empty($id_nelayan) && !isset($id_nelayan)) {
             redirect('nelayan');
         }
-        $this->data['data'] = $this->model->read($this->session->flashdata('id'));
+        $this->data['data'] = $this->model->read($id_nelayan, 'biodata');
+        $this->data['pengaduan'] = $this->model->read($id_nelayan, 'pengaduan');
+        $this->data['postingan'] = $this->model->read($id_nelayan, 'postingan');
+        $this->data['tangkapan_ikan'] = $this->model->read($id_nelayan, 'tangkapan ikan');
+        
         $this->render('read');
     }
     public function delete() {
