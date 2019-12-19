@@ -169,7 +169,7 @@
                         .setLngLat([item.longitude, item.latitude])
                         .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
                                 .setHTML('<h3>' + item.title + '</h3><p>' + item.description + '</p>'))
-                        .addTo(lay);
+                        .addTo(map);
 //                marker.offset([0,0]);
             });
         });

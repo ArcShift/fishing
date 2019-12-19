@@ -1,4 +1,3 @@
-<?php // echo validation_errors(); ?>
 <div class="panel panel-default">
     <form class="form-horizontal" method="post" enctype="multipart/form-data">
         <div class="panel-heading"></div>

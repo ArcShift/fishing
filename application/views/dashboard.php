@@ -1,21 +1,3 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="panel-heading-btn">
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
-        </div>
-        <h4><?php echo $pengumuman['title'] ?></h4>
-    </div>
-    <div class="panel-body">
-
-        <h5><?php echo $pengumuman['sort_desc'] ?></h5>
-        <p><?php echo $pengumuman['full_desc'] ?></p>
-        <?php // print_r($pengumuman) ?>
-    </div>
-    <div class="panel-footer">
-    </div>
-</div>
 <!--WIDGET-->
 <?php
 $widgets = array(
@@ -50,4 +32,118 @@ $widgets = array(
             </div>
         <?php } ?>
     <?php } ?>
+</div>
+<!--GRAFIK==============================-->
+<?php
+$berat = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+foreach ($dataGrafik as $d) {
+    $berat[$d['bulan_id'] - 1] = $d['jumlah_berat'];
+}
+?>
+<div class="panel bg-inverse text-white wrapper">
+    <h3 class="text-white text-center">Grafik Tangkapan</h3>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="tahun" class="col-sm-2 control-label">Tahun</label>
+            <div class="col-sm-2">
+                <select class="form-control" name="tahun" id="tahun">
+                    <?php foreach ($tahun as $t) { ?>
+                        <option value="<?php echo $t['tahun'] ?>" <?php echo $this->input->get('tahun') == $t['tahun'] ? 'selected' : '' ?>><?php echo $t['tahun'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <button class="btn btn-primary fa fa-search"></button>
+        </div>
+    </form>
+    <canvas id="mainGraph" height="100"></canvas>
+</div>
+<script>
+    var bulan = ['Januari', 'Februari', 'Maret', 'April', 'May', 'June', 'July', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    var ctx = document.getElementById('mainGraph').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: bulan,
+            datasets: [{
+                    label: 'Jumlah Tangkapan',
+                    backgroundColor: 'rgb(0,200, 200)',
+                    data: <?php echo json_encode($berat); ?>
+                }]
+        },
+        options: {}
+    });
+</script>
+<!--TABEL TANGKAPAN-->
+<div class="panel pagination-inverse bg-white clearfix no-rounded-corner">
+    <table id="data-table" data-order='[[1,"asc"]]' class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="width-100">Bulan</th>
+                <th>Tangkapan (Kg)</th>
+                <th>Postingan</th>
+                <th>Nelayan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($dataGrafik as $d) { ?>
+                <tr>
+                    <td><?php echo $d['bulan'] ?></td>
+                    <td><?php echo $d['jumlah_berat'] ?></td>
+                    <td><?php echo $d['jumlah_postingan'] ?></td>
+                    <td><?php echo $d['jumlah_nelayan'] ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+<!--PENGUMUMAN TERBARU-->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
+        </div>
+        <h4>Pengumuman</h4>
+    </div>
+    <div class="panel-body">
+        <h4><?php echo $pengumuman['title'] ?></h4>
+        <h5><?php echo $pengumuman['sort_desc'] ?></h5>
+        <p><?php echo $pengumuman['full_desc'] ?></p>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+<!--METADATA PETA-->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
+        </div>
+        <h4>Data Peta</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sumber Data</th>
+                    <th>Tgl Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>LAPAN</td>
+                    <td>20-10-2019</td>
+                </tr>
+                <tr>
+                    <td>ITS</td>
+                    <td>17-12-2018</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+    </div>
 </div>

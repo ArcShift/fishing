@@ -19,6 +19,7 @@ class Tangkapan extends MY_Controller {
         }
         $this->render('grafik');
     }
+
     public function koordinat() {
         echo json_encode($this->model->koordinat());
     }
