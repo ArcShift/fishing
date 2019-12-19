@@ -107,7 +107,9 @@
             'type': 'circle',
             'source': {
                 type: 'geojson',
-                data: 'https://spbn.pusfatja.lapan.go.id/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3An102019&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature'
+                data: 'http://localhost/fishing/assets/desember.json'
+//                data: 'http://bumi.id/mapbox/desember.json'
+//                data: 'https://spbn.pusfatja.lapan.go.id/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3An102019&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature'
             },
             'paint': {
 // make circles larger as the user zooms from z12 to z22
