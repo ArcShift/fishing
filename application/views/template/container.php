@@ -137,7 +137,7 @@
                             array("id" => "fish", "nama" => "ikan", "icon" => "fish"),
                             array("id" => "cmpl", "nama" => "pengaduan", "icon" => "phone-volume"),//finding
                             array("id" => "", "nama" => "tangkapan", "icon" => "shopping-basket"),
-//                            array("id" => "", "nama" => "peralatan", "icon" => "gear"),
+                            array("id" => "", "nama" => "peralatan", "icon" => "toolbox"),
                             array("id" => "", "nama" => "pengumuman", "icon" => "bullhorn"),
                             array("id" => "", "nama" => "dokumen", "icon" => "file")
                         );

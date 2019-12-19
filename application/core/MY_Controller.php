@@ -12,8 +12,8 @@ class MY_Controller extends CI_Controller {
         //Finding => Peta/ pengaduan
         //Catch => tangkapan
 //        "Super Admin" => array('dashboard', 'admin'),//Super Admin
-        "Super Admin" => array('dashboard', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'pengumuman', 'dokumen'), //Test
-        "Admin Perikanan" => array('dashboard', 'nelayan', 'ikan', 'p', 'peta', 'tangkapan'), //Admin Perikanan
+        "Super Admin" => array('dashboard', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta','peralatan', 'pengumuman', 'dokumen'), //Test
+        "Admin Perikanan" => array('dashboard', 'nelayan', 'ikan', '', 'peta', 'tangkapan'), //Admin Perikanan
         "Supervisor Bappeda" => array('dashboard', 'user'), //Admin Perikanan
         "Supervisor Perikanan" => array('dashboard', 'user')//Admin Perikanan
     );
