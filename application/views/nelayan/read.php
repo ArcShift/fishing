@@ -309,7 +309,7 @@
                         <tr>
                             <td colspan="6">
                                 <?php foreach($this->model->get_pic($r['id'], 'post') as $r){ ?>
-                                    <img src="<?php echo base_url('upload/tangkapan/').$r['url_file'] ?>" width="100" height="100" class="border border-primary"/>
+                                    <img src="<?php echo base_url('upload/post/').$r['url_file'] ?>" width="100" height="100" class="border border-primary"/>
                                 <?php } ?>
                             </td>
                         </tr>
