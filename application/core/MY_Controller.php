@@ -51,6 +51,7 @@ class MY_Controller extends CI_Controller {
             $pagination = $this->session->userdata('pagination');
         }
         if ($this->input->post('read')) {
+            $this->session->set_userdata('id_nelayan', $this->input->post('read'));
             $this->session->set_flashdata('id', $this->input->post('read'));
             redirect('/' . $this->module . '/detail');
         } else if ($this->input->post('edit')) {

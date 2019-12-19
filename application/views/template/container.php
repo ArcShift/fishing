@@ -175,7 +175,11 @@
                                 </ol>-->
                 <!-- end breadcrumb -->
                 <!-- begin page-header -->
-                <h1 class="page-header"><?php echo ucfirst($module) ?> <small><?php echo ucfirst($subTitle) ?></small></h1>
+                <h1 class="page-header"><?php echo ucfirst($module) ?> <small><?php echo ucfirst($subTitle) ?></small>
+                <?php if (preg_match("#^nelayan/detail#", uri_string())) { ?>
+                    <button class="btn btn-primary pull-right" onclick="window.history.back()">Kembali</button>
+                <?php } ?>
+                </h1>
                 <!-- end page-header -->
                 <?php if (!empty($this->session->flashdata('msgSuccess'))) { ?>
                     <div class="alert alert-success alert-dismissible">
