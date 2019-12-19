@@ -54,8 +54,8 @@
 <div class="row">
     <div class="col-sm-2 panel panel-default">
         <div class="panel-body">
-<!--            <p>Update terakhir: <?php // echo $data['date']                     ?></p>
-            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')                     ?>">Update</a>-->
+<!--            <p>Update terakhir: <?php // echo $data['date']                      ?></p>
+            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')                      ?>">Update</a>-->
             <nav id="menu"></nav>
             <p>lat: <span id="lat"></span></p>
             <p>long: <span id="long"></span></p>
@@ -103,13 +103,11 @@
             }
         });
         map.addLayer({
-            'id': 'Persebaran Ikan: Aplikasi Lain',
+            'id': 'Persebaran Ikan: ITS',
             'type': 'circle',
             'source': {
                 type: 'geojson',
-                data: 'http://localhost/fishing/assets/desember.json'
-//                data: 'http://bumi.id/mapbox/desember.json'
-//                data: 'https://spbn.pusfatja.lapan.go.id/geoserver/wfs?srsName=EPSG%3A4326&typename=geonode%3An102019&outputFormat=json&version=1.0.0&service=WFS&request=GetFeature'
+                data: '<?php echo base_url('assets/desember.json');?>'
             },
             'paint': {
 // make circles larger as the user zooms from z12 to z22
@@ -158,25 +156,37 @@
         });
         //ADD MARKERS
         $.getJSON('<?php echo site_url('peta/pengaduan') ?>', null, function (resp) {
-//            console.log(resp);
-            resp.forEach(function (item) {
-                console.log(item);
-                var el = document.createElement('div');
-                el.className = 'marker';
-                var marker = new mapboxgl.Marker(el, {
-                    offset: [0, -20]
-                })
-                        .setLngLat([item.longitude, item.latitude])
-                        .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
-                                .setHTML('<h3>' + item.title + '</h3><p>' + item.description + '</p>'))
-                        .addTo(map);
-//                marker.offset([0,0]);
+            map.addLayer({
+                'id': 'Tangkapan',
+                'type': 'circle',
+                'source': {
+                    type: 'geojson',
+                    data: resp
+                },
+                'paint': {
+// make circles larger as the user zooms from z12 to z22
+                    'circle-radius': {
+                        'base': 1.75,
+                        'stops': [[12, 2], [22, 180]]
+                    },
+// color circles by ethnicity, using a match expression
+// https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+                    'circle-color': [
+                        'match',
+                        ['get', 'ethnicity'],
+                        'White', '#fbb03b',
+                        'Black', '#223b53',
+                        'Hispanic', '#e55e5e',
+                        'Asian', '#3bb2d0',
+                        /* other */ 'green'
+                    ]
+                }
             });
         });
 
     });
     //==================
-    var toggleableLayerIds = ['Persebaran Ikan: LAPAN', 'Persebaran Ikan: Aplikasi Lain', 'Batas Perairan: Jawa Timur'];
+    var toggleableLayerIds = ['Persebaran Ikan: LAPAN', 'Persebaran Ikan: ITS', 'Batas Perairan: Jawa Timur', 'Tangkapan'];
     for (var i = 0; i < toggleableLayerIds.length; i++) {
         var id = toggleableLayerIds[i];
         var link = document.createElement('a');

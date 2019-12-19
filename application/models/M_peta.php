@@ -18,13 +18,27 @@ class M_peta extends CI_Model {
 
     function pengaduan_json() {//geojson
         $this->db->select('latitude, longitude, title, description');
-        return $result = $this->db->get('fisherman_complaintment')->result_array();
+//        return $result = $this->db->get('fisherman_complaintment')->result_array();
+        $result = $this->db->get('fisherman_complaintment')->result_array();
         //====standard geojson data
         $data = array();
         foreach ($result as $r) {
             array_push($data, array($r['longitude'], $r['latitude']));
         }
-        return $data;
+        $geojson = array(
+            "type" => "FeatureCollection",
+            "features" => array(
+                array(
+                    "type" => "Feature",
+                    "properties" => null,
+                    "geometry" => array(
+                        "type" => "LineString",
+                        "coordinates" => $data
+                    )
+                )
+            )
+        );
+        return $geojson;
     }
 
 }
