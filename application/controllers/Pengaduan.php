@@ -30,6 +30,7 @@ class Pengaduan extends MY_Controller {
             array("title" => "status", "field" => "fc.status"),
         );
         $config['crud'] = array('read', 'update');
+        $config['peta'] = TRUE;
         $this->db->order_by('fc.id', 'DESC');
         parent::reads($config);
     }
@@ -62,5 +63,10 @@ class Pengaduan extends MY_Controller {
         $this->data['dataFiles'] = $result['files'];
         $this->render('edit');
     }
-
+    public function peta() {
+        $this->render('peta');
+    }
+    public function koordinat(){
+        echo json_encode($this->model->koordinat());
+    }
 }

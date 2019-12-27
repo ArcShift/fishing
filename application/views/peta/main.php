@@ -57,8 +57,11 @@
 <!--            <p>Update terakhir: <?php // echo $data['date']                      ?></p>
             <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')                      ?>">Update</a>-->
             <nav id="menu"></nav>
-            <p>lat: <span id="lat"></span></p>
-            <p>long: <span id="long"></span></p>
+            <p><span></span></p>
+            <p>Koordinat titik yang dipilih adalah :<span></span></p>
+            <p><span></span></p>
+            <p> lat: <span id="lat"></span></p>
+            <p> long: <span id="long"></span></p>
         </div>
     </div>
     <div class="col-sm-10">
@@ -72,8 +75,8 @@
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [112.572597, -7.2755979],
-        zoom: 9
+        center: [114.1923798892957, -7.472805706317786],
+        zoom: 6
     });
     map.on('load', function () {
         map.addLayer({
@@ -157,7 +160,7 @@
         //ADD MARKERS
         $.getJSON('<?php echo site_url('peta/pengaduan') ?>', null, function (resp) {
             map.addLayer({
-                'id': 'Tangkapan',
+                'id': 'Persebaran Aduan Nelayan',
                 'type': 'circle',
                 'source': {
                     type: 'geojson',
@@ -186,7 +189,7 @@
 
     });
     //==================
-    var toggleableLayerIds = ['Persebaran Ikan: LAPAN', 'Persebaran Ikan: ITS', 'Batas Perairan: Jawa Timur', 'Tangkapan'];
+    var toggleableLayerIds = ['Batas Perairan: Jawa Timur', 'Persebaran Ikan: LAPAN', 'Persebaran Ikan: ITS', 'Persebaran Aduan Nelayan'];
     for (var i = 0; i < toggleableLayerIds.length; i++) {
         var id = toggleableLayerIds[i];
         var link = document.createElement('a');

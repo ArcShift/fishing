@@ -13,10 +13,16 @@ class M_pengaduan extends CI_Model {
         $result['files'] = $this->db->get('fisherman_complaintment_files fcf')->result_array();
         return $result;
     }
+
     function edit() {
         $this->db->set("status", $this->input->post("status"));
-        $this->db->where("id",$this->input->post("id"));
+        $this->db->where("id", $this->input->post("id"));
         return $this->db->update("fisherman_complaintment");
+    }
+
+    function koordinat() {
+        $this->db->select('longitude, latitude, description, status');
+        return $this->db->get('fisherman_complaintment')->result_array();
     }
 
 }

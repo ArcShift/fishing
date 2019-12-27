@@ -38,6 +38,9 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                     <small class="label label-info">Total data: <?php echo $dataCount ?></small>
                 </div>
                 <div class="col-sm-10">
+                    <?php if (isset($config['peta'])) { ?>
+                    <a class="btn btn-primary fa fa-map" title="Peta" href="<?php echo site_url($module . '/peta'); ?>"></a>
+                    <?php } ?>
                     <?php if (in_array('create', $config['crud'])) { ?>
                         <a class="btn btn-primary fa fa-plus" href="<?php echo site_url($module . '/create'); ?>" title="Tambah Data"></a>
                     <?php } ?>
