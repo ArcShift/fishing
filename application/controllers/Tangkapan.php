@@ -10,14 +10,36 @@ class Tangkapan extends MY_Controller {
     }
 
     public function index() {
-        $this->subTitle = "grafik";
-        $this->data['tahun'] = $this->model->tahun();
-        if ($this->input->get('tahun')) {
-            $this->data['data'] = $this->model->jumlah($this->input->get('tahun'));
-        } else {
-            $this->data['data'] = $this->model->jumlah($this->data['tahun'][0]['tahun']);
-        }
-        $this->render('grafik');
+        $config['filter'] = array(
+            array("title" => "nelayan", "type" => "input"),
+//            array("title" => "keterangan", "type" => "input"),
+//            array("title" => "status", "type" => "array", "data" => array(
+//                    'pending', 'diterima', 'ditolak', 'sedang ditangani', 'selesai'
+//                )
+//            )
+        );
+        $config['table'] = "fisherman_log_catch_fish log";
+        $config['join'] = array(
+            array("table" => "fisherman fm", "relation" => "fm.id = log.id_fisherman"),
+            array("table" => "fish f", "relation" => "f.id = log.id_fish"),
+        );
+        $config['column'] = array(
+            array("title" => "nelayan", "field" => "fm.name"),
+            array("title" => "ikan", "field" => "f.name"),
+            array("title" => "berat", "field" => "log.total_weight"),
+//            array("title" => "latitude", "field" => "fc.latitude"),
+//            array("title" => "longitude", "field" => "fc.longitude"),
+//            array("title" => "status", "field" => "fc.status"),
+        );
+        $config['crud'] = array();
+        $config['peta'] = TRUE;
+//        $this->db->order_by('fc.id', 'DESC');
+        parent::reads($config);
+    }
+
+    public function peta() {
+        $this->subTitle = "peta";
+        $this->render('peta');
     }
 
     public function koordinat() {
