@@ -3,7 +3,6 @@
 class M_peta extends CI_Model {
 
     function get() {
-
         $this->db->order_by('date', 'DESC');
         return $this->db->get('persebaran_ikan')->row_array();
     }
@@ -11,6 +10,7 @@ class M_peta extends CI_Model {
     function create() {
         $in = $this->input->post();
         $this->db->set('user', $this->session->userdata('userId'));
+        $this->db->set('source', $in['sumber']);
         $this->db->set('date', $in['tanggal']);
         $this->db->set('file', $this->upload->data()['file_name']);
         return $this->db->insert('persebaran_ikan');
@@ -39,6 +39,14 @@ class M_peta extends CI_Model {
             )
         );
         return $geojson;
+    }
+
+    function peta($source) {
+        $this->db->select('file');
+        $this->db->where('source', $source);
+        $this->db->order_by('created_at', 'DESC');
+        $r=$this->db->get('persebaran_ikan')->row_array();
+        return base_url('upload/persebaran_ikan/'.$r['file']);
     }
 
 }

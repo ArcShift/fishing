@@ -54,14 +54,15 @@
 <div class="row">
     <div class="col-sm-2 panel panel-default">
         <div class="panel-body">
-<!--            <p>Update terakhir: <?php // echo $data['date']                      ?></p>
-            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')                      ?>">Update</a>-->
+<!--            <p>Update terakhir: <?php // echo $data['date']                             ?></p>
+            <a class="btn btn-primary" href="<?php // echo site_url($module . '/data_persebaran')                             ?>">Update</a>-->
             <nav id="menu"></nav>
             <p><span></span></p>
             <p>Koordinat titik yang dipilih adalah :<span></span></p>
             <p><span></span></p>
             <p> lat: <span id="lat"></span></p>
             <p> long: <span id="long"></span></p>
+            <a class="btn btn-primary" href="<?php echo site_url($module . '/data'); ?>">Data peta</a>
         </div>
     </div>
     <div class="col-sm-10">
@@ -84,25 +85,14 @@
             'type': 'circle',
             'source': {
                 type: 'geojson',
-                data: '<?php echo base_url('upload/persebaran_ikan/' . $data['file']) ?>'
+                data: '<?php echo $lapan ?>'
             },
             'paint': {
-// make circles larger as the user zooms from z12 to z22
                 'circle-radius': {
                     'base': 1.75,
                     'stops': [[12, 2], [22, 180]]
                 },
-// color circles by ethnicity, using a match expression
-// https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
-                'circle-color': [
-                    'match',
-                    ['get', 'ethnicity'],
-                    'White', '#fbb03b',
-                    'Black', '#223b53',
-                    'Hispanic', '#e55e5e',
-                    'Asian', '#3bb2d0',
-                    /* other */ 'black'
-                ]
+                'circle-color': 'black'
             }
         });
         map.addLayer({
@@ -110,7 +100,7 @@
             'type': 'circle',
             'source': {
                 type: 'geojson',
-                data: '<?php echo base_url('assets/desember.json');?>'
+                data: '<?php echo $its ?>'
             },
             'paint': {
 // make circles larger as the user zooms from z12 to z22

@@ -2,6 +2,17 @@
     <form class="form-horizontal" method="post" enctype="multipart/form-data">
         <div class="panel-heading"></div>
         <div class="panel-body">
+            <div class="form-group <?php echo form_error('sumber') != "" ? "has-error" : ""  ?>">
+                <label for="tanggal" class="col-sm-2 control-label">Sumber Data</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="sumber" name="sumber">
+                        <option value="LAPAN">LAPAN</option>
+                        <option value="ITS">ITS</option>
+                    </select>
+                    <!--<input class="form-control" type="" id="sumber" name="tanggal" value="<?php // echo $this->input->post('tanggal') ?>">-->
+                    <span class="help-block"><?php echo form_error('tanggal');  ?></span>
+                </div>
+            </div>
             <div class="form-group <?php echo form_error('tanggal') != "" ? "has-error" : ""  ?>">
                 <label for="tanggal" class="col-sm-2 control-label">Tanggal</label>
                 <div class="col-sm-10">
