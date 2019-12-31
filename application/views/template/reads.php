@@ -28,7 +28,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                         </div>
                     <?php } ?>
                     <div class="col-sm-1">
-                        <button name="cari" value="ok" class="btn btn-primary fa fa-search" title="Cari Data"></button>
+                        <button name="cari" value="ok" class="btn btn-primary fa fa-search" title="Cari Data"> Cari</button>
                     </div>
                 </div>
                 <br/>
@@ -39,10 +39,10 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                 </div>
                 <div class="col-sm-10">
                     <?php if (isset($config['peta'])) { ?>
-                    <a class="btn btn-primary fa fa-map" title="Peta" href="<?php echo site_url($module . '/peta'); ?>"></a>
+                    <a class="btn btn-primary fa fa-map pull-right" title="Peta" href="<?php echo site_url($module . '/peta'); ?>"> Peta</a>
                     <?php } ?>
                     <?php if (in_array('create', $config['crud'])) { ?>
-                        <a class="btn btn-primary fa fa-plus" href="<?php echo site_url($module . '/create'); ?>" title="Tambah Data"></a>
+                        <a class="btn btn-primary fa fa-plus pull-right" href="<?php echo site_url($module . '/create'); ?>" title="Tambah Data"> Tambah</a>
                     <?php } ?>
                 </div>
             </div>
@@ -73,13 +73,13 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                             <?php } ?>
                             <td>
                                 <?php if (in_array('read', $config['crud'])) { ?>
-                                    <button name="read" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-search" title="Lihat Detail"></button>
+                                    <button name="read" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-search" title="Lihat Detail"> Lihat</button>
                                 <?php } ?>
                                 <?php if (in_array('update', $config['crud'])) { ?>
-                                    <button name="edit" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-edit" title="Edit Data"></button>
+                                    <button name="edit" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-edit" title="Edit Data"> Ubah</button>
                                 <?php } ?>
                                 <?php if (in_array('delete', $config['crud'])) { ?>                                    
-                                    <button name="initDelete" value="<?php echo $d['id'] ?>" class="btn btn-danger fa fa-trash" title="Hapus Data"></button>
+                                    <button name="initDelete" value="<?php echo $d['id'] ?>" class="btn btn-danger fa fa-trash" title="Hapus Data"> Hapus</button>
                                 <?php } ?>
                             </td>
                         </tr>

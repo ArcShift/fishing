@@ -14,9 +14,10 @@ class Dokumen extends MY_Controller {
         $config['column'] = array(
             array("title" => "judul", "field" => "d.title"),
             array("title" => "file", "field" => "d.url"),
-//            array("title" => "latitude", "field" => "fc.latitude"),
-//            array("title" => "longitude", "field" => "fc.longitude"),
-//            array("title" => "status", "field" => "fc.status"),
+            array("title" => "admin", "field" => "u.nama"),
+        );
+        $config['join'] = array(
+            array("table" => "user u", "relation" => "u.id = d.user"),
         );
         $config['crud'] = array('create', 'read', 'delete');
         $config['table'] = 'document d';
@@ -26,11 +27,9 @@ class Dokumen extends MY_Controller {
     public function create() {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[document.title]');
-//        $this->form_validation->set_rules('dokumen', 'Dokumen', 'required');
         if (!$this->form_validation->run() == FALSE) {
             if ($this->input->post('create')) {
                 if (parent::upload('dokumen', 'dokumen')) {
-//                    die(print_r($this->upload->data()));
                     if ($this->model->create()) {
                         redirect($this->module);
                     } else {

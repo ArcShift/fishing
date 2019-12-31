@@ -16,6 +16,10 @@ class Pengumuman extends MY_Controller {
             array("title" => "judul", "field" => "a.title"),
             array("title" => "deskripsi", "field" => "a.sort_desc"),
             array("title" => "create", "field" => "a.created_at"),
+            array("title" => "admin", "field" => "u.nama"),
+        );
+        $config['join'] = array(
+            array("table" => "user u", "relation" => "u.id = a.user"),
         );
         $config['crud'] = array('create', 'delete');
         parent::reads($config);
