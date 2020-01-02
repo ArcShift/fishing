@@ -10,7 +10,7 @@ class Dokumen extends MY_Controller {
     }
 
     public function index() {
-        $config = array();
+        $config['search'] = array('judul','file','admin');
         $config['column'] = array(
             array("title" => "judul", "field" => "d.title"),
             array("title" => "file", "field" => "d.url"),

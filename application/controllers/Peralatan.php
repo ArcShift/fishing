@@ -11,11 +11,11 @@ class Peralatan extends MY_Controller {
 
     public function index() {
         $config = array();
+        $config['search'] = array('name','deskripsi');
         $config['table'] = 'gear g';
         $config['column'] = array(
             array("title" => "name", "field" => "g.name"),
             array("title" => "deskripsi", "field" => "g.description"),
-//            array("title" => "create", "field" => "g.updated_at"),
         );
         $config['crud'] = array('create', 'delete');
         parent::reads($config);

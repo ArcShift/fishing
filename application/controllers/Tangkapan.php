@@ -10,14 +10,7 @@ class Tangkapan extends MY_Controller {
     }
 
     public function index() {
-        $config['filter'] = array(
-            array("title" => "nelayan", "type" => "input"),
-//            array("title" => "keterangan", "type" => "input"),
-//            array("title" => "status", "type" => "array", "data" => array(
-//                    'pending', 'diterima', 'ditolak', 'sedang ditangani', 'selesai'
-//                )
-//            )
-        );
+        $config['search']=array('nelayan', 'ikan','latitude', 'longitude');
         $config['table'] = "fisherman_log_catch_fish log";
         $config['join'] = array(
             array("table" => "fisherman fm", "relation" => "fm.id = log.id_fisherman"),
@@ -27,8 +20,8 @@ class Tangkapan extends MY_Controller {
             array("title" => "nelayan", "field" => "fm.name"),
             array("title" => "ikan", "field" => "f.name"),
             array("title" => "berat", "field" => "log.total_weight"),
-//            array("title" => "latitude", "field" => "fc.latitude"),
-//            array("title" => "longitude", "field" => "fc.longitude"),
+            array("title" => "latitude", "field" => "log.latitude"),
+            array("title" => "longitude", "field" => "log.longitude"),
 //            array("title" => "status", "field" => "fc.status"),
         );
         $config['crud'] = array();

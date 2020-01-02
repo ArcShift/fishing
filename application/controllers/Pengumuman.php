@@ -11,6 +11,7 @@ class Pengumuman extends MY_Controller {
 
     public function index() {
         $config = array();
+        $config['search']= array('judul','deskripsi','admin');
         $config['table'] = 'announcement a';
         $config['column'] = array(
             array("title" => "judul", "field" => "a.title"),

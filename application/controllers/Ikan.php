@@ -10,9 +10,7 @@ class Ikan extends MY_Controller {
     }
 
     public function index() {
-        $config['filter'] = array(
-            array("title" => "nama", "type" => "input"),
-        );
+        $config['search']= array('nama', 'keterangan');
         $config['table'] = "fish f";
         $config['column'] = array(
             array("title" => "nama", "field" => "name"),

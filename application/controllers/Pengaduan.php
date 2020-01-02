@@ -10,9 +10,8 @@ class Pengaduan extends MY_Controller {
     }
 
     public function index() {
+        $config['search']=array('nelayan', 'title', 'latitude', 'longitude');
         $config['filter'] = array(
-            array("title" => "nelayan", "type" => "input"),
-            array("title" => "keterangan", "type" => "input"),
             array("title" => "status", "type" => "array", "data" => array(
                     'pending', 'diterima', 'ditolak', 'sedang ditangani', 'selesai'
                 )

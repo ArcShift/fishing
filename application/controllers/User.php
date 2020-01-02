@@ -14,8 +14,8 @@ class User extends MY_Controller {
 
     public function index() {
         $config = array();
+        $config['search']= array('username');
         $config['filter'] = array(
-            array("title" => "username", "type" => "input"),
             array("title" => "type", "type" => "select_query", "query" => "SELECT id AS k, nama AS v FROM role WHERE id<>1")
         );
         $config['table'] = "user u";

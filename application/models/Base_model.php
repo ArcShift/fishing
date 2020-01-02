@@ -4,16 +4,26 @@ class Base_model extends CI_Model {
 
     function reads($pagination, $data) {
         $result = array();
+//        die(print_r($data));
+        if (isset($data['search']) && $this->input->post('search')) {
+            foreach ($data['search'] as $key => $s) {
+                foreach ($data['column'] as $c) {
+                    if ($s == $c['title']) {
+                        if ($key == 0) {
+                            $this->db->like($c['field'], $this->input->post('search'));
+                        } else {
+                            $this->db->or_like($c['field'], $this->input->post('search'));
+                        }
+                    }
+                }
+            }
+        }
         if (isset($data['filter'])) {
             foreach ($data['filter'] as $f) {
                 if ($this->input->post($f['title'])) {
                     foreach ($data['column'] as $c) {
                         if ($f['title'] == $c['title']) {
                             $this->db->like($c['field'], $this->input->post($f['title']));
-                            if ($f['type'] == 'select_query') {//TODO: exact search query 
-                            } else if ($f['type'] == 'input') {
-                                
-                            }
                         }
                     }
                 }
@@ -28,10 +38,10 @@ class Base_model extends CI_Model {
                 $this->db->join($j['table'], $j['relation']);
             }
         }
-        if(isset($pagination['sort'])){
+        if (isset($pagination['sort'])) {
             $this->db->order_by($pagination['sort']);
         }
-        
+
         $result['count'] = $this->db->count_all_results($data['table'], FALSE);
         $limit = $this->config->item('page_limit');
         $offset = $limit * ($pagination['page'] - 1);

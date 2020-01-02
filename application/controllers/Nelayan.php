@@ -11,11 +11,7 @@ class Nelayan extends MY_Controller {
 
     public function index() {
         $config= array();
-        $config['filter'] = array(
-            array("title" => "name", "type" => "input"),
-            array("title" => "username", "type" => "input"),
-            array("title" => "email", "type" => "input"),
-        );
+        $config['search']=array('nama', 'username', 'email');
         $config['table'] = "fisherman n";
         $config['column'] = array(
             array("title" => "nama", "field" => "n.name"),
