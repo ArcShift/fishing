@@ -27,6 +27,7 @@ class Dashboard extends MY_Controller {
             $this->data['dataGrafik'] = $this->model->jumlah($this->data['tahun'][0]['tahun']);
         }
         //============
+        $this->data['dataPeta'] = $this->model->dataPeta();
         $this->render('dashboard', false);
     }
 

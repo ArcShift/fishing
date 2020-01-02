@@ -1,6 +1,10 @@
 <?php
 $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
 //echo $this->db->last_query();
+//echo '<br/>';
+//print_r($this->input->post());
+//echo '<br/>';
+//print_r($pagination);
 ?>
 <form method="post">
     <div class="panel panel-default">
@@ -66,7 +70,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                     <tr>
                         <th>No</th>
                         <?php foreach ($config['column'] as $c) { ?>
-                            <th><?php echo ucfirst($c['title']) ?><button class="fa fa-sort<?php if (isset($pagination['sort'])) echo $c['field'] == $pagination['sort'] ? '-down' : '' ?> fa-sort" name="sort" value="<?php echo $c['title'] ?>"></button></th>
+                            <th><?php echo ucfirst($c['title']) ?><button class="fa fa-sort<?php if (isset($pagination['sort'])) echo $c['title'] == $pagination['sort'] ? '-down' : '' ?> fa-sort" name="sort" value="<?php echo $c['title'] ?>"></button></th>
                         <?php } ?>
                         <?php if (in_array('read', $config['crud']) | in_array('edit', $config['crud']) | in_array('delete', $config['crud'])) { ?>
                             <th class="text-center fit-width">Aksi</th>

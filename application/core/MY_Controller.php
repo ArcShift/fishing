@@ -65,8 +65,7 @@ class MY_Controller extends CI_Controller {
         } else if ($this->input->post('cari')) {
             $pagination['page'] = 1;
         } else if ($this->input->post('sort')) {
-            $key =array_search($this->input->post('sort'), array_column($config['column'], 'title'));
-            $pagination['sort']=  $config['column'][$key]['field'];
+            $pagination['sort']=  $this->input->post('sort');
         }
         if (isset($config['filter'])) {
             for ($i = 0; $i < count($config['filter']); $i++) {

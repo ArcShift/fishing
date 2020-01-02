@@ -13,12 +13,10 @@ class Ikan extends MY_Controller {
         $config['search']= array('nama', 'keterangan');
         $config['table'] = "fish f";
         $config['column'] = array(
-            array("title" => "nama", "field" => "name"),
-            array("title" => "keterangan", "field" => "about_fish"),
+            array("title" => "nama", "field" => "f.name"),
+            array("title" => "keterangan", "field" => "f.about_fish"),
         );
-//        $config['crud'] = array('create', 'read', 'update', 'delete');
         $config['crud'] = array('create');
-        $this->db->order_by('name', 'DESC');
         parent::reads($config);
     }
 

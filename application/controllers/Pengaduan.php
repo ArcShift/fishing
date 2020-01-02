@@ -30,7 +30,6 @@ class Pengaduan extends MY_Controller {
         );
         $config['crud'] = array('read', 'update');
         $config['peta'] = TRUE;
-        $this->db->order_by('fc.id', 'DESC');
         parent::reads($config);
     }
 

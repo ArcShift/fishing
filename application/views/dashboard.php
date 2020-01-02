@@ -2,7 +2,7 @@
 <?php
 $widgets = array(
     array("module" => "nelayan", "title" => "Nelayan", "color" => "primary", "icon" => "user", "value" => $countFisherman, "note" => "Nelayan baru: " . $newFisherman, "progress" => 50, "url" => "nelayan"),
-    array("module" => "tangkapan", "title" => "Total Tangkapan", "color" => "success", "icon" => "shopping-basket", "value" => $totalCatch. " kg", "note" => "Tangkapan minggu ini: " . $weekCatch. " kg", "progress" => 50, "url" => "nelayan"),
+    array("module" => "tangkapan", "title" => "Total Tangkapan", "color" => "success", "icon" => "shopping-basket", "value" => $totalCatch . " kg", "note" => "Tangkapan minggu ini: " . $weekCatch . " kg", "progress" => 50, "url" => "nelayan"),
 //    array("module" => "user", "title" => "User", "color" => "success", "icon" => "user-secret", "value" => $countAdmin, "note" => "-", "progress" => 50, "url" => "admin"),
     array("module" => "ikan", "title" => "Database Ikan", "color" => "grey", "icon" => "fish", "value" => $countFish, "note" => "-", "progress" => 50, "url" => "ikan"),
     array("module" => "pengaduan", "title" => "Pengaduan", "color" => "inverse-dark", "icon" => "phone-volume", "value" => $countPengaduan, "note" => "Tertangani " . $countPengaduanTertangani, "progress" => (80), "url" => "pengaduan"),
@@ -133,14 +133,12 @@ foreach ($dataGrafik as $d) {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>LAPAN</td>
-                    <td>20-10-2019</td>
-                </tr>
-                <tr>
-                    <td>ITS</td>
-                    <td>17-12-2018</td>
-                </tr>
+                <?php foreach ($dataPeta as $p) { ?>
+                 <tr>
+                    <td><?php echo $p['source']?></td>
+                    <td><?php echo $p['date']?></td>
+                </tr>   
+                <?php } ?>
             </tbody>
         </table>
     </div>

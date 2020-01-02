@@ -55,4 +55,7 @@ class M_dashboard extends CI_Model {
         $this->db->group_by('month(`date`)');
         return $this->db->get('fisherman_log_catch_fish')->result_array();
     }
+    function dataPeta() {
+        return $this->db->query('select source, date from(SELECT * FROM fishing.persebaran_ikan ORDER BY date desc) as t group by source')->result_array();
+    }
 }

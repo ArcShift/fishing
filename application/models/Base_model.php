@@ -39,7 +39,11 @@ class Base_model extends CI_Model {
             }
         }
         if (isset($pagination['sort'])) {
-            $this->db->order_by($pagination['sort']);
+            foreach ($data['column'] as $c) {
+                if ($pagination['sort'] == $c['title']) {
+                    $this->db->order_by($c['field']);
+                }
+            }
         }
 
         $result['count'] = $this->db->count_all_results($data['table'], FALSE);
