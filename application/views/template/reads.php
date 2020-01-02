@@ -39,7 +39,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                 </div>
                 <div class="col-sm-10">
                     <?php if (isset($config['peta'])) { ?>
-                    <a class="btn btn-primary fa fa-map pull-right" title="Peta" href="<?php echo site_url($module . '/peta'); ?>"> Peta</a>
+                        <a class="btn btn-primary fa fa-map pull-right" title="Peta" href="<?php echo site_url($module . '/peta'); ?>"> Peta</a>
                     <?php } ?>
                     <?php if (in_array('create', $config['crud'])) { ?>
                         <a class="btn btn-primary fa fa-plus pull-right" href="<?php echo site_url($module . '/create'); ?>" title="Tambah Data"> Tambah</a>
@@ -61,7 +61,9 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                         <?php foreach ($config['column'] as $c) { ?>
                             <th><?php echo ucfirst($c['title']) ?><button class="fa fa-sort<?php if (isset($pagination['sort'])) echo $c['field'] == $pagination['sort'] ? '-down' : '' ?> fa-sort" name="sort" value="<?php echo $c['title'] ?>"></button></th>
                         <?php } ?>
+                        <?php if (in_array('read', $config['crud']) | in_array('edit', $config['crud']) | in_array('delete', $config['crud'])) { ?>
                             <th class="text-center fit-width">Aksi</th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,18 +73,20 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                             <?php foreach ($config['column'] as $c) { ?>
                                 <td><?php echo $d[$c['title']] ?></td>
                             <?php } ?>
+                            <?php if (in_array('read', $config['crud']) | in_array('edit', $config['crud']) | in_array('delete', $config['crud'])) { ?>
                                 <td class="pull-right">
-                                <?php if (in_array('read', $config['crud'])) { ?>
-                                    <button name="read" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-search" title="Lihat Detail"> Lihat</button>
-                                <?php } ?>
-                                <?php if (in_array('update', $config['crud'])) { ?>
-                                    <button name="edit" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-edit" title="Edit Data"> Ubah</button>
-                                <?php } ?>
-                                <?php if (in_array('delete', $config['crud'])) { ?>                                    
-                                    <button name="initDelete" value="<?php echo $d['id'] ?>" class="btn btn-danger fa fa-trash" title="Hapus Data"> Hapus</button>
-                                <?php } ?>
-                            </td>
-                        </tr>
+                                    <?php if (in_array('read', $config['crud'])) { ?>
+                                        <button name="read" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-search" title="Lihat Detail"> Lihat</button>
+                                    <?php } ?>
+                                    <?php if (in_array('update', $config['crud'])) { ?>
+                                        <button name="edit" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-edit" title="Edit Data"> Ubah</button>
+                                    <?php } ?>
+                                    <?php if (in_array('delete', $config['crud'])) { ?>                                    
+                                        <button name="initDelete" value="<?php echo $d['id'] ?>" class="btn btn-danger fa fa-trash" title="Hapus Data"> Hapus</button>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     <?php } ?>
                 </tbody>
             </table>
