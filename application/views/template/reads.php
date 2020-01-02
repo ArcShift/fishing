@@ -61,7 +61,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                         <?php foreach ($config['column'] as $c) { ?>
                             <th><?php echo ucfirst($c['title']) ?><button class="fa fa-sort<?php if (isset($pagination['sort'])) echo $c['field'] == $pagination['sort'] ? '-down' : '' ?> fa-sort" name="sort" value="<?php echo $c['title'] ?>"></button></th>
                         <?php } ?>
-                        <th>Aksi</th>
+                            <th class="text-center fit-width">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,7 +71,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                             <?php foreach ($config['column'] as $c) { ?>
                                 <td><?php echo $d[$c['title']] ?></td>
                             <?php } ?>
-                            <td>
+                                <td class="pull-right">
                                 <?php if (in_array('read', $config['crud'])) { ?>
                                     <button name="read" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-search" title="Lihat Detail"> Lihat</button>
                                 <?php } ?>
