@@ -7,7 +7,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
             <?php if (isset($config['filter'])) { ?>
                 <div class="row">
                     <?php foreach ($config['filter'] as $f) { ?>
-                        <div class="col-sm-5 m-b-10">
+                        <div class="col-sm-3 m-b-10">
                             <?php if ($f['type'] == 'input') { ?>
                                 <input class="form-control" name="<?php echo $f['title'] ?>" placeholder="<?php echo ucfirst($f['title']) ?>" value="<?php echo $this->input->post($f['title']) ?>">
                             <?php } else if ($f['type'] == 'select_query') { ?>
@@ -27,7 +27,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                             <?php } ?>
                         </div>
                     <?php } ?>
-                    <div class="col-sm-1">
+                    <div class="col">
                         <button name="cari" value="ok" class="btn btn-primary fa fa-search" title="Cari Data"> Cari</button>
                     </div>
                 </div>
