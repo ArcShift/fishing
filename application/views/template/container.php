@@ -91,9 +91,9 @@
                                 <span class="hidden-xs"><?php echo $this->session->userdata('user') ?></span> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="<?php echo site_url('user/profile') ?>">Edit Profile</a></li>
+                                <li><a href="<?php echo site_url('akun') ?>">Edit Profil</a></li>
                                 <li class="divider"></li>
-                                <li><a href="<?php echo site_url('login/logout') ?>">Log Out</a></li>
+                                <li><a href="<?php echo site_url('akun/logout') ?>">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -117,12 +117,12 @@
                                 <div class="name dropdown">
                                     <a href="javascript:;" data-toggle="dropdown"><?php echo $this->session->userdata('user') ?><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="<?php echo site_url('user/profile') ?>">Edit Profile</a></li>
+                                        <li><a href="<?php echo site_url('akun') ?>">Edit Profil</a></li>
 <!--                                        <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
                                         <li><a href="javascript:;">Calendar</a></li>
                                         <li><a href="javascript:;">Setting</a></li>-->
                                         <li class="divider"></li>
-                                        <li><a href="<?php echo site_url('login/logout') ?>">Log Out</a></li>
+                                        <li><a href="<?php echo site_url('akun/logout') ?>">Log Out</a></li>
                                     </ul>
                                 </div>
                                 <div class="position"><?php echo $this->session->userdata('role') ?></div>

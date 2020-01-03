@@ -12,10 +12,10 @@ class MY_Controller extends CI_Controller {
         //Finding => Peta/ pengaduan
         //Catch => tangkapan
 //        "Super Admin" => array('dashboard', 'admin'),//Super Admin
-        "Super Admin" => array('dashboard', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta','peralatan', 'pengumuman', 'dokumen', 'setting'), //Test
-        "Admin Perikanan" => array('dashboard', 'nelayan', 'ikan', '', 'peta', 'tangkapan'), //Admin Perikanan
-        "Supervisor Bappeda" => array('dashboard', 'user'), //Admin Perikanan
-        "Supervisor Perikanan" => array('dashboard', 'user')//Admin Perikanan
+        "Super Admin" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting'),
+        "Admin Perikanan" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting'),
+        "Supervisor Bappeda" => array('dashboard', 'akun', 'peta', 'pengaduan', 'tangkapan'),
+        "Supervisor Perikanan" => array('dashboard', 'akun', 'user', 'peta', 'pengaduan', 'tangkapan')
     );
 
     public function __construct() {
@@ -65,7 +65,7 @@ class MY_Controller extends CI_Controller {
         } else if ($this->input->post('cari')) {
             $pagination['page'] = 1;
         } else if ($this->input->post('sort')) {
-            $pagination['sort']=  $this->input->post('sort');
+            $pagination['sort'] = $this->input->post('sort');
         }
         if (isset($config['filter'])) {
             for ($i = 0; $i < count($config['filter']); $i++) {

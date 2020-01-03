@@ -18,11 +18,7 @@ class Peta extends MY_Controller {
 
     public function data() {
         $config = array();
-        $config['filter'] = array(
-            array("title" => "file", "type" => "input"),
-//            array("title" => "username", "type" => "input"),
-//            array("title" => "email", "type" => "input"),
-        );
+        $config['search']= array('sumber','file','tanggal');
         $config['table'] = "persebaran_ikan p";
         $config['column'] = array(
             array("title" => "sumber", "field" => "p.source"),
