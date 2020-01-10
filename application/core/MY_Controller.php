@@ -6,12 +6,6 @@ class MY_Controller extends CI_Controller {
     protected $subTitle = null;
     protected $data = array();
     protected $aksesModule = array(
-        //User => nelayan
-        //Fish => ikan
-        //Gear => perlengkapan
-        //Finding => Peta/ pengaduan
-        //Catch => tangkapan
-//        "Super Admin" => array('dashboard', 'admin'),//Super Admin
         "Super Admin" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting'),
         "Admin Perikanan" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting'),
         "Supervisor Bappeda" => array('dashboard', 'akun', 'peta', 'pengaduan', 'tangkapan'),
