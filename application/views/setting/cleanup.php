@@ -1,6 +1,3 @@
-<?php
-print_r($this->input->post());
-?>
 <div class="panel panel-default">
     <div class="panel-heading"></div>
     <div class="panel-body">
