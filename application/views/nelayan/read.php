@@ -190,11 +190,9 @@
 
                                         <?php if ($r['file_type'] == 'image') { ?>
                                             <img src="<?php echo base_url('upload/pengaduan/') . $r['url_file'] ?>" width="100" height="100" class="border border-primary"/>
-                                            <?php
-                                        } else {
-                                            echo 'video';
-                                        }
-                                        ?>
+                                        <?php } else { ?>
+                                            <img src="https://cdn6.aptoide.com/imgs/d/f/1/df18c4e0557eed472f3abd502b2dde11_icon.png?w=240" data="<?php echo base_url('upload/pengaduan/') . $r['url_file'] ?>" width="100" height="100" class="border border-primary" onclick="play(this)"/>  
+                                        <?php } ?>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -263,11 +261,9 @@
                                     <?php foreach ($this->model->get_pic($r['id'], 'catch') as $r) { ?>
                                         <?php if ($r['file_type'] == 'image') { ?>
                                             <img src="<?php echo base_url('upload/tangkapan/') . $r['url_file'] ?>" width="100" height="100" class="border border-primary"/>
-                                            <?php
-                                        } else {
-                                            echo 'video';
-                                        }
-                                        ?>
+                                        <?php } else { ?>
+                                            <img src="https://cdn6.aptoide.com/imgs/d/f/1/df18c4e0557eed472f3abd502b2dde11_icon.png?w=240" data="<?php echo base_url('upload/tangkapan/') . $r['url_file'] ?>" width="100" height="100" class="border border-primary" onclick="play(this)"/>  
+                                        <?php } ?>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -337,19 +333,15 @@
                                         <?php if ($r['file_type'] == 'image') { ?>
                                             <img src="<?php echo base_url('upload/post/') . $r['url_file'] ?>" width="100" height="100" class="border border-primary"/>
                                         <?php } else { ?>
-                                            <!--<a href="#modal-dialog" class="btn btn-block btn-primary" data-toggle="modal" width="100" height="100" class="border border-primary">-->
                                             <img src="https://cdn6.aptoide.com/imgs/d/f/1/df18c4e0557eed472f3abd502b2dde11_icon.png?w=240" data="<?php echo base_url('upload/post/') . $r['url_file'] ?>" width="100" height="100" class="border border-primary" onclick="play(this)"/>  
-                                            <!--</a>-->
                                         <?php } ?>
                                     <?php } ?>
                                 </td>
                             </tr>
-
                         </table>
                     <?php } ?>
                 </div>
                 <!-- end timeline-content -->
-
             </div>
             <!-- end timeline-body -->
         </li>
