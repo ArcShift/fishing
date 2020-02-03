@@ -22,7 +22,6 @@ class M_ikan extends CI_Model {
     }
 
     function create() {
-//        $this->upload->data();
         $post = $this->input->post();
         $data = array(
             'name' => $post['nama'],
@@ -34,6 +33,19 @@ class M_ikan extends CI_Model {
         } else {
             return false;
         }
+    }
+
+    function update() {
+        $data = $this->input->post();
+        $this->db->set('name',$data['nama']);
+        $this->db->set('about_fish',$data['keterangan']);
+        $this->db->where('id', $data['id']);
+        $this->db->update('fish');
+    }
+
+    function delete($id) {
+        $this->db->where('id', $id);
+        return $this->db->delete('fish');
     }
 
 }
