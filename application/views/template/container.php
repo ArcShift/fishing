@@ -74,7 +74,7 @@
                 <div class="container-fluid">
                     <!-- begin mobile sidebar expand / collapse button -->
                     <div class="navbar-header">
-                        <a href="<?php echo site_url() ?>" class="navbar-brand"><img src="<?php echo base_url('assets/gambar/') ?>logo.png" class="logo" /><?php echo $this->config->item("app_name") ?></a>
+                        <a href="<?php echo site_url() ?>" class="navbar-brand"><img src="<?php echo base_url('assets/gambar/') ?>Logo Smart Fishing.png" class="logo" /><?php echo $this->config->item("app_name") ?></a>
                         <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -139,7 +139,8 @@
                             array("id" => "", "nama" => "tangkapan", "icon" => "shopping-basket"),
                             array("id" => "", "nama" => "peralatan", "icon" => "toolbox"),
                             array("id" => "", "nama" => "pengumuman", "icon" => "bullhorn"),
-                            array("id" => "", "nama" => "dokumen", "icon" => "file")
+                            array("id" => "", "nama" => "dokumen", "icon" => "file"),
+                            array("id" => "", "nama" => "upt", "icon" => "university")
                         );
                         ?>
                         <?php foreach ($modules as $m) { ?>
