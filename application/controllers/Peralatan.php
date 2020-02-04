@@ -11,13 +11,13 @@ class Peralatan extends MY_Controller {
 
     public function index() {
         $config = array();
-        $config['search'] = array('name','deskripsi');
+        $config['search'] = array('name', 'deskripsi');
         $config['table'] = 'gear g';
         $config['column'] = array(
             array("title" => "name", "field" => "g.name"),
             array("title" => "deskripsi", "field" => "g.description"),
         );
-        $config['crud'] = array('create', 'delete');
+        $config['crud'] = array('create', 'update', 'delete');
         parent::reads($config);
     }
 
@@ -32,6 +32,20 @@ class Peralatan extends MY_Controller {
             }
         }
         $this->render('create');
+    }
+
+    public function edit() {
+        if ($this->session->userdata('id')) {
+            $id = $this->session->userdata('id');
+        } else if($this->input->post('update')){
+            $this->model->update();
+            $this->session->set_flashdata('msgSuccess', 'Data berhasil diubah');
+            redirect($this->module);
+        }else{
+            redirect($this->module);
+        }
+        $this->data['data'] = $this->model->read($id);
+        $this->render('update');
     }
 
     public function delete() {

@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of M_alat
- *
- * @author Jelajah Tekno Indone
- */
 class M_alat extends CI_Model {
 
     function create() {
@@ -30,7 +19,15 @@ class M_alat extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->get('gear')->row_array();
     }
-    
+
+    function update() {
+        $input= $this->input->post();
+        $this->db->set('name', $input['name']);
+        $this->db->set('description', $input['desc']);
+        $this->db->where('id', $input['id']);
+        $this->db->update('gear');
+    }
+
     function delete($id) {
         $this->db->where('id', $id);
         if ($this->db->delete('gear')) {
