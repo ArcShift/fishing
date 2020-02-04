@@ -10,6 +10,7 @@
                     <button class="btn btn-primary" id="gantiFoto" type="button">Ganti Foto</button>
                 </div>
                 <div class="col-sm-10">
+                    <input class="form-control" id="id" name="id" hidden="" value="<?php echo $data['id'] ?>">
                     <div class="form-group <?php // echo form_error('nama') != "" ? "has-error" : ""   ?>">
                         <label for="nama" class="col-sm-2 control-label">Nama</label>
                         <div class="col-sm-10">
@@ -28,7 +29,7 @@
                 <input class="form-control" type="file" id="foto" name="foto" accept="image/*" hidden="">
             </div>
             <a href="<?php echo site_url($module) ?>" class="btn btn-primary">Kembali</a>
-            <button type="submit" name="create" value="ok" class="btn btn-primary pull-right">Simpan</button>
+            <button type="submit" name="update" value="ok" class="btn btn-primary pull-right">Simpan</button>
         </div>
     </div>
 </form>

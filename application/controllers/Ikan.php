@@ -10,20 +10,24 @@ class Ikan extends MY_Controller {
     }
 
     public function index() {
-        $config['search']= array('nama', 'keterangan');
+        $config['search'] = array('nama', 'keterangan');
         $config['table'] = "fish f";
         $config['column'] = array(
             array("title" => "nama", "field" => "f.name"),
             array("title" => "keterangan", "field" => "f.about_fish"),
         );
-        $config['crud'] = array('create');
+        $config['crud'] = array('create', 'delete', 'update');
         parent::reads($config);
     }
 
     public function edit() {
         if ($this->session->userdata('id')) {
             $id = $this->session->userdata('id');
-        } else {
+        } else if($this->input->post('update')){
+            $this->model->update();
+            $this->session->set_flashdata('msgSuccess', 'Data berhasil diubah');
+            redirect($this->module);
+        }else{
             redirect($this->module);
         }
         $this->data['data'] = $this->model->read($id);
@@ -31,7 +35,21 @@ class Ikan extends MY_Controller {
     }
 
     public function delete() {
-        parent::delete();
+        $this->subTitle = 'delete';
+        if (!empty($this->session->flashdata('id'))) {
+            $this->data['data'] = $this->model->read($this->session->flashdata('id'));
+            $this->render('delete');
+        } else if ($this->input->post('delete')) {
+            $id = $this->input->post('delete');
+            $data = $this->model->read($id);
+            if ($this->model->delete($id)) {
+                unlink($this->config->item('upload_path') . 'pengumuman/' . $data['url_img']);
+                $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
+                redirect($this->module);
+            }
+        } else {
+            redirect($this->module);
+        }
     }
 
     public function create() {
@@ -55,5 +73,4 @@ class Ikan extends MY_Controller {
         }
         $this->render("create");
     }
-
 }

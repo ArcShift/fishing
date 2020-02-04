@@ -38,7 +38,7 @@
             <div class="login">
                 <!-- begin login-brand -->
                 <div class="login-brand bg-grey text-white">
-                    <img src="<?php echo base_url('assets/gambar/') ?>logo.png" height="36" class="pull-right" alt="" />
+                    <img src="<?php echo base_url('assets/gambar/') ?>Logo Smart Fishing.png" height="36" class="pull-right" alt="" />
                     <?php echo $this->config->item("app_name") ?>
                 </div>
                 <!-- end login-brand -->
