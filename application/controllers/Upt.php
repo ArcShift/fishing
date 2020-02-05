@@ -24,6 +24,8 @@ class Upt extends MY_Controller {
             array("title" => "alat", "field" => "g.name"),
             array("title" => "jenis kapal", "field" => "u.jenis_kapal"),
             array("title" => "ikan", "field" => "f.name"),
+            array("title" => "volume", "field" => "u.volume"),
+            array("title" => "harga", "field" => "u.harga_lelang"),
         );
         $config['crud'] = array('create');
         parent::reads($config);
