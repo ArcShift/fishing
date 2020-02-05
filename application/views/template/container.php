@@ -140,15 +140,18 @@
                             array("id" => "", "nama" => "peralatan", "icon" => "toolbox"),
                             array("id" => "", "nama" => "pengumuman", "icon" => "bullhorn"),
                             array("id" => "", "nama" => "dokumen", "icon" => "file"),
-                            array("id" => "", "nama" => "upt", "icon" => "university")
+                            array("id" => "", "nama" => "upt", "title"=>"Rekap Data UPT", "icon" => "university")
                         );
                         ?>
                         <?php foreach ($modules as $m) { ?>
+                        <?php
+                            if($m['nama']==$module)$activeModule=$m;
+                        ?>
                             <?php if (in_array($m['nama'], $aksesModule)) { ?>
                                 <li class="<?php echo $m['nama'] == $this->uri->segment(1) ? 'active' : '' ?>">
                                     <a href="<?php echo site_url($m['nama']) ?>">
                                         <i class="fa fa-<?php echo $m['icon'] ?>"></i>
-                                        <span><?php echo ucfirst($m['nama']) ?></span>
+                                        <span><?php echo isset($m['title'])?$m['title']:ucfirst($m['nama']) ?></span>
                                     </a>
                                 </li>
                             <?php } ?>
@@ -176,7 +179,7 @@
                                 </ol>-->
                 <!-- end breadcrumb -->
                 <!-- begin page-header -->
-                <h1 class="page-header"><?php echo ucfirst($module) ?> <small><?php echo ucfirst($subTitle) ?></small>
+                <h1 class="page-header"><?php echo isset($activeModule['title'])?$activeModule['title']:ucfirst($module) ?> <small><?php echo ucfirst($subTitle) ?></small>
                 <?php if (preg_match("#^nelayan/detail#", uri_string())) { ?>
                     <button class="btn btn-primary pull-right" onclick="window.history.back()">Kembali</button>
                 <?php } ?>

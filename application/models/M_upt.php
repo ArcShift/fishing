@@ -14,6 +14,7 @@ class M_upt extends CI_Model {
     }
     function create() {
         $input= $this->input->post();
+        $this->db->set('tanggal',$input['tanggal']);
         $this->db->set('nama_kapal',$input['nama_kapal']);
         $this->db->set('id_gear',$input['jenis_alat_tangkap']);
         $this->db->set('jenis_kapal',$input['jenis_kapal']);

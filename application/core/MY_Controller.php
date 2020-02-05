@@ -10,7 +10,7 @@ class MY_Controller extends CI_Controller {
         "Admin Perikanan" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting'),
         "Supervisor Bappeda" => array('dashboard', 'akun', 'peta', 'pengaduan', 'tangkapan'),
         "Supervisor Perikanan" => array('dashboard', 'akun', 'user', 'peta', 'pengaduan', 'tangkapan'),
-        "UPT" => array("dashboard", "akun", "upt")
+        "UPT" => array("dashboard", "akun","peta","ikan","peralatan", "upt")
     );
 
     public function __construct() {
