@@ -5,8 +5,11 @@ class M_admin extends CI_Model {
     public function create() {
         $post = $this->input->post();
         $data = array(
+            'full_name' => $post['fullName'],
             'nama' => $post['username'],
             'idUserType' => $post['type'],
+            'email' => $post['email'],
+            'no_hp' => $post['noHP'],
             'pass' => md5($post['pass'])
         );
         if ($this->db->insert('user', $data)) {
@@ -18,18 +21,9 @@ class M_admin extends CI_Model {
 
     function detail($id) {
         $this->db->where('u.id', $id);
-        $this->db->select("u.id, r.nama AS type, u.nama");
+        $this->db->select("u.*, r.nama AS type");
         $this->db->join("role r", "u.idUserType = r.id");
         return $this->db->get("user u")->row_array();
-    }
-
-    public function delete($id) {
-        $this->db->where('id', $id);
-        if ($this->db->delete('user')) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public function gantiPassword() {
@@ -38,9 +32,12 @@ class M_admin extends CI_Model {
         return $this->db->update("user");
     }
 
-    public function update() {//update
+    public function update() {
+        $this->db->set("full_name", $this->input->post("fullName"));
         $this->db->set("nama", $this->input->post("nama"));
         $this->db->set("idUserType", $this->input->post("type"));
+        $this->db->set("email", $this->input->post("email"));
+        $this->db->set("no_hp", $this->input->post("noHP"));
         $this->db->where("id", $this->input->post("id"));
         return $this->db->update("user");
     }

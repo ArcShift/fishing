@@ -20,8 +20,11 @@ class User extends MY_Controller {
         );
         $config['table'] = "user u";
         $config['column'] = array(
+            array("title" => "full name", "field" => "u.full_name"),
             array("title" => "username", "field" => "u.nama"),
             array("title" => "type", "field" => "r.nama"),
+            array("title" => "email", "field" => "u.email"),
+            array("title" => "no HP", "field" => "u.no_hp"),
         );
         $config['join'] = array(
             array("table" => "role r", "relation" => "u.idUserType = r.id"),
@@ -79,24 +82,18 @@ class User extends MY_Controller {
     }
 
     public function delete() {
-        $this->subTitle = "Delete";
-        if (!empty($this->session->flashdata('id'))) {
-            $this->data['data'] = $this->model->detail($this->session->flashdata('id'));
-        } elseif ($this->input->post('delete')) {
-            $id = $this->input->post('delete');
-            if ($id == $this->session->userId) {
-                $this->session->set_flashdata('msgError', 'Tidak bisa menghapus data anda sendiri');
-            } elseif ($this->model->delete($id)) {
-                $this->session->set_flashdata('msgSuccess', 'Berhasil menghapus data');
-                redirect($this->module);
-            } else {
-                $this->session->set_flashdata('msgError', 'Gagal menghapus data');
-                $this->data['data'] = $this->model->detail($id);
-            }
-        } else {
-            redirect($this->module);
-        }
-        $this->render("delete");
+        $config['table'] = "user u";
+        $config['field'] = array(
+            array("title" => "full name", "field" => "u.full_name"),
+            array("title" => "type", "field" => "r.nama"),
+            array("title" => "username", "field" => "u.nama"),
+            array("title" => "email", "field" => "u.email"),
+            array("title" => "no HP", "field" => "u.no_hp"),
+        );
+        $config['join'] = array(
+            array("table" => "role r", "relation" => "u.idUserType = r.id"),
+        );
+        parent::hapus($config);
     }
 
 }

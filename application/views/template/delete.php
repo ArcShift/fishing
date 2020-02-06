@@ -1,8 +1,3 @@
-<?php
-//print_r($this->input->post());
-print_r($data);
-//echo $this->db->last_query();
-?>
 <div class="panel panel-danger">
     <div class="panel-heading">
         <h1 class="panel-title">Anda yakin akan menghapus data ini?</h1>
