@@ -45,7 +45,6 @@ class Base_model extends CI_Model {
                 }
             }
         }
-
         $result['count'] = $this->db->count_all_results($data['table'], FALSE);
         $limit = $this->config->item('page_limit');
         $offset = $limit * ($pagination['page'] - 1);
@@ -61,6 +60,26 @@ class Base_model extends CI_Model {
             $this->db->set($in['field'], $this->input->post($in['id']));
         }
         $this->db->insert($config['table']);
+    }
+
+    function read($config) {
+        $idField = isset($config['idField']) ? $config['idField'] : 'id';
+        foreach ($config['field'] as $f) {
+            $this->db->select($f['field'] . " AS " . $f['title']);
+        }
+        if (isset($config['join'])) {
+            foreach ($config['join'] as $j) {
+                $this->db->join($j['table'], $j['relation']);
+            }
+        }
+        $this->db->where(substr($config['table'], strpos($config['table'], " ") + 1) . '.' . $idField, $this->session->flashdata('id'));
+        return $this->db->get($config['table'])->row_array();
+    }
+
+    function delete($config) {
+        $idField = isset($config['idField']) ? $config['idField'] : 'id';
+        $this->db->where($idField, $this->input->post('delete'));
+        return $this->db->delete(explode(' ', $config['table'])[0]);
     }
 
 }

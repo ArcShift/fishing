@@ -6,11 +6,11 @@ class MY_Controller extends CI_Controller {
     protected $subTitle = null;
     protected $data = array();
     protected $aksesModule = array(
-        "Super Admin" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting', 'upt'),
+        "Super Admin" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting', 'upt', 'role'),
         "Admin Perikanan" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting'),
         "Supervisor Bappeda" => array('dashboard', 'akun', 'peta', 'pengaduan', 'tangkapan'),
         "Supervisor Perikanan" => array('dashboard', 'akun', 'user', 'peta', 'pengaduan', 'tangkapan'),
-        "UPT" => array("dashboard", "akun","peta","ikan","peralatan", "upt")
+        "UPT" => array("dashboard", "akun", "peta", "ikan", "peralatan", "upt")
     );
 
     public function __construct() {
@@ -87,14 +87,28 @@ class MY_Controller extends CI_Controller {
         $this->subTitle = 'create';
         $this->data['input'] = $config['input'];
         if ($this->input->post('simpan')) {
-            $this->b_model->insert($config);
+            $this->model->insert($config);
         }
-        $this->render('template/create');
+        $this->render('template/create', FALSE);
     }
 
-    protected function delete() {
-        $this->subTitle = "Delete";
-        $this->render('template/delete');
+    protected function hapus($config) {
+        $this->subTitle = "delete";
+        if (!empty($this->session->flashdata('id'))) {
+            $this->data['config'] = $config;
+            $this->data['data'] = $this->b_model->read($config);
+            $this->render('template/delete', FALSE);
+        } else if ($this->input->post('delete')) {
+            $id = $this->input->post('delete');
+            if ($this->b_model->delete($config)) {
+                $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
+            } else {
+                $this->session->set_flashdata('msgError', 'Data gagal dihapus');
+            }
+            redirect($this->module);
+        } else {
+            redirect($this->module);
+        }
     }
 
     protected function upload($folder, $input) {
