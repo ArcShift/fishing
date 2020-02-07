@@ -12,13 +12,4 @@ class M_pengumuman extends CI_Model {
         return $this->db->insert('announcement');
     }
 
-    function read($id) {
-        $this->db->where('id', $id);
-        return $this->db->get('announcement')->row_array();
-    }
-    function delete($id) {
-        $this->db->where('id', $id);
-        return $this->db->delete('announcement');
-    }
-
 }

@@ -22,11 +22,10 @@ class Tangkapan extends MY_Controller {
             array("title" => "berat", "field" => "log.total_weight"),
             array("title" => "latitude", "field" => "log.latitude"),
             array("title" => "longitude", "field" => "log.longitude"),
-//            array("title" => "status", "field" => "fc.status"),
         );
-        $config['crud'] = array();
+        $config['crud'] = array('');
         $config['peta'] = TRUE;
-//        $this->db->order_by('fc.id', 'DESC');
+        $this->db->order_by('log.id', 'DESC');
         parent::reads($config);
     }
 

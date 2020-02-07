@@ -53,8 +53,8 @@ class User extends MY_Controller {
     }
 
     public function edit() {
-        if (!empty($this->session->flashdata('id'))) {
-            $this->data['data'] = $this->model->detail($this->session->flashdata('id'));
+        if ($this->input->post('edit')) {
+            $this->data['data'] = $this->model->detail($this->input->post('edit'));
         } else if ($this->input->post('update')) {
             if ($this->model->update()) {
                 $this->session->set_flashdata('msgSuccess', 'Berhasil mengupdate data');

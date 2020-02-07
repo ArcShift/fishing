@@ -21,35 +21,25 @@ class Ikan extends MY_Controller {
     }
 
     public function edit() {
-        if ($this->session->userdata('id')) {
-            $id = $this->session->userdata('id');
-        } else if($this->input->post('update')){
+        if ($this->input->post('edit')) {
+            $this->data['data'] = $this->model->read($this->input->post('edit'));
+            $this->render('update');
+        } else if ($this->input->post('update')) {
             $this->model->update();
             $this->session->set_flashdata('msgSuccess', 'Data berhasil diubah');
             redirect($this->module);
-        }else{
-            redirect($this->module);
-        }
-        $this->data['data'] = $this->model->read($id);
-        $this->render('update');
-    }
-
-    public function delete() {
-        $this->subTitle = 'delete';
-        if (!empty($this->session->flashdata('id'))) {
-            $this->data['data'] = $this->model->read($this->session->flashdata('id'));
-            $this->render('delete');
-        } else if ($this->input->post('delete')) {
-            $id = $this->input->post('delete');
-            $data = $this->model->read($id);
-            if ($this->model->delete($id)) {
-                unlink($this->config->item('upload_path') . 'pengumuman/' . $data['url_img']);
-                $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
-                redirect($this->module);
-            }
         } else {
             redirect($this->module);
         }
+    }
+
+    public function delete() {
+        $config['table'] = "fish f";
+        $config['field'] = array(
+            array("title" => "nama", "field" => "f.name"),
+            array("title" => "keterangan", "field" => "f.about_fish"),
+        );
+        parent::hapus($config);
     }
 
     public function create() {
@@ -73,4 +63,5 @@ class Ikan extends MY_Controller {
         }
         $this->render("create");
     }
+
 }

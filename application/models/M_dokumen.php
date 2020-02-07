@@ -14,9 +14,4 @@ class M_dokumen extends CI_Model {
         return $this->db->get('document')->row_array();
     }
 
-    function delete($id) {
-        $this->db->where('id', $id);
-        return $this->db->delete('document');
-    }
-
 }

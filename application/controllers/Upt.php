@@ -9,6 +9,8 @@ class Upt extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model("m_upt", "model");
+        $this->data['alat'] = $this->model->alat();//create, edit
+        $this->data['ikan'] = $this->model->ikan();
     }
 
     public function index() {
@@ -37,9 +39,11 @@ class Upt extends MY_Controller {
                 redirect($this->module);
             }
         }
-        $this->data['alat'] = $this->model->alat();
-        $this->data['ikan'] = $this->model->ikan();
         $this->render('create');
+    }
+
+    function edit() {
+        parent:: edit();
     }
 
     function delete() {

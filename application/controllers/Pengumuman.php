@@ -45,21 +45,17 @@ class Pengumuman extends MY_Controller {
     }
 
     public function delete() {
-        $this->subTitle = 'delete';
-        if (!empty($this->session->flashdata('id'))) {
-            $this->data['data'] = $this->model->read($this->session->flashdata('id'));
-            $this->render('delete');
-        } else if ($this->input->post('delete')) {
-            $id = $this->input->post('delete');
-            $data = $this->model->read($id);
-            if ($this->model->delete($id)) {
-                unlink($this->config->item('upload_path') . 'pengumuman/' . $data['url_img']);
-                $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
-                redirect($this->module);
-            }
-        } else {
-            redirect($this->module);
-        }
+        $config['table'] = 'announcement a';
+        $config['field'] = array(
+            array("title" => "judul", "field" => "a.title"),
+            array("title" => "deskripsi", "field" => "a.sort_desc"),
+            array("title" => "create", "field" => "a.created_at"),
+            array("title" => "admin", "field" => "u.nama"),
+        );
+        $config['join'] = array(
+            array("table" => "user u", "relation" => "u.id = a.user"),
+        );
+        parent::hapus($config);
     }
 
 }

@@ -87,13 +87,13 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                             <?php if (in_array('read', $config['crud']) | in_array('edit', $config['crud']) | in_array('delete', $config['crud'])) { ?>
                                 <td class="pull-right">
                                     <?php if (in_array('read', $config['crud'])) { ?>
-                                        <button name="read" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-search" title="Lihat Detail"> Lihat</button>
+                                    <button name="read" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-search" title="Lihat Detail" formaction="<?php echo $module ?>/detail"> Lihat</button>
                                     <?php } ?>
                                     <?php if (in_array('update', $config['crud'])) { ?>
-                                        <button name="edit" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-edit" title="Edit Data"> Ubah</button>
+                                        <button name="edit" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-edit" title="Edit Data" formaction="<?php echo $module ?>/edit"> Ubah</button>
                                     <?php } ?>
                                     <?php if (in_array('delete', $config['crud'])) { ?>                                    
-                                        <button name="initDelete" value="<?php echo $d['id'] ?>" class="btn btn-danger fa fa-trash" title="Hapus Data"> Hapus</button>
+                                        <button name="initDelete" value="<?php echo $d['id'] ?>" class="btn btn-danger fa fa-trash" title="Hapus Data" formaction="<?php echo $module ?>/delete"> Hapus</button>
                                     <?php } ?>
                                 </td>
                             </tr>

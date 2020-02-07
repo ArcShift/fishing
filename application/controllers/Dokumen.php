@@ -10,7 +10,7 @@ class Dokumen extends MY_Controller {
     }
 
     public function index() {
-        $config['search'] = array('judul','file','admin');
+        $config['search'] = array('judul', 'file', 'admin');
         $config['column'] = array(
             array("title" => "judul", "field" => "d.title"),
             array("title" => "file", "field" => "d.url"),
@@ -43,11 +43,12 @@ class Dokumen extends MY_Controller {
     }
 
     public function detail() {
-        if(!$this->session->flashdata('id')){
+        if ($this->input->post('read')) {
+            $this->data['data'] = $this->model->read($this->input->post('read'));
+            $this->render('read');
+        } else {
             redirect($this->module);
         }
-        $this->data['data']=$this->model->read($this->session->flashdata('id'));
-        $this->render('read');
     }
 
     public function edit() {
@@ -55,21 +56,16 @@ class Dokumen extends MY_Controller {
     }
 
     public function delete() {
-        $this->subTitle = 'delete';
-        if (!empty($this->session->flashdata('id'))) {
-            $this->data['data'] = $this->model->read($this->session->flashdata('id'));
-            $this->render('delete');
-        } else if ($this->input->post('delete')) {
-            $id = $this->input->post('delete');
-            $data = $this->model->read($id);
-            if ($this->model->delete($id)) {
-                unlink($this->config->item('upload_path') . 'dokumen/' . $data['url']);
-                $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
-                redirect($this->module);
-            }
-        } else {
-            redirect($this->module);
-        }
+        $config['field'] = array(
+            array("title" => "judul", "field" => "d.title"),
+            array("title" => "file", "field" => "d.url"),
+            array("title" => "admin", "field" => "u.nama"),
+        );
+        $config['join'] = array(
+            array("table" => "user u", "relation" => "u.id = d.user"),
+        );
+        $config['table'] = 'document d';
+        parent::hapus($config);
     }
 
 }

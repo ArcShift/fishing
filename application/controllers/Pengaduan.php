@@ -35,10 +35,10 @@ class Pengaduan extends MY_Controller {
 
     public function detail() {
         $this->subTitle = 'Detail';
-        if (empty($this->session->flashdata('id'))) {
+        if (!$this->input->post('read')) {
             redirect($this->module);
         }
-        $result = $this->model->read($this->session->flashdata('id'));
+        $result = $this->model->read($this->input->post('read'));
         $this->data['dataLaporan'] = $result['main'];
         $this->render('detail');
     }
@@ -51,10 +51,10 @@ class Pengaduan extends MY_Controller {
             } else {
                 $this->session->set_flashdata('msgError', 'Status gagal diupdate');
             }
-        } else if (empty($this->session->flashdata('id'))) {
+        } else if (!$this->input->post('edit')) {
             redirect($this->module);
         }
-        $this->data['id'] = $this->session->flashdata('id');
+        $this->data['id'] = $this->input->post('edit');
         $this->subTitle = 'Edit';
         $result = $this->model->read($this->data['id']);
         $this->data['dataLaporan'] = $result['main'];

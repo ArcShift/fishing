@@ -15,26 +15,12 @@ class M_alat extends CI_Model {
         }
     }
 
-    function read($id) {
-        $this->db->where('id', $id);
-        return $this->db->get('gear')->row_array();
-    }
-
     function update() {
-        $input= $this->input->post();
+        $input = $this->input->post();
         $this->db->set('name', $input['name']);
         $this->db->set('description', $input['desc']);
         $this->db->where('id', $input['id']);
         $this->db->update('gear');
-    }
-
-    function delete($id) {
-        $this->db->where('id', $id);
-        if ($this->db->delete('gear')) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 }

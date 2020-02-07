@@ -17,7 +17,7 @@
     <div class="panel-footer">
         <form method="post">
             <a class="btn btn-primary" href="<?php echo site_url($module) ?>">KEMBALI</a>
-            <button class="btn btn-danger pull-right" name="delete" value="<?php echo $this->session->flashdata('id') ?>">HAPUS</button>
+            <button class="btn btn-danger pull-right" name="delete" value="<?php echo $this->input->post('initDelete') ?>">HAPUS</button>
         </form>
     </div>
 </div>

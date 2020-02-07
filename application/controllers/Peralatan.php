@@ -35,35 +35,25 @@ class Peralatan extends MY_Controller {
     }
 
     public function edit() {
-        if ($this->session->userdata('id')) {
-            $id = $this->session->userdata('id');
-        } else if($this->input->post('update')){
+        if ($this->input->post('edit')) {
+            $this->data['data'] = $this->model->read($this->input->post('edit'));
+            $this->render('update');
+        } else if ($this->input->post('update')) {
             $this->model->update();
             $this->session->set_flashdata('msgSuccess', 'Data berhasil diubah');
-            redirect($this->module);
-        }else{
-            redirect($this->module);
-        }
-        $this->data['data'] = $this->model->read($id);
-        $this->render('update');
-    }
-
-    public function delete() {
-        $this->subTitle = 'delete';
-        if (!empty($this->session->flashdata('id'))) {
-            $this->data['data'] = $this->model->read($this->session->flashdata('id'));
-            $this->render('delete');
-        } else if ($this->input->post('delete')) {
-            $id = $this->input->post('delete');
-            if ($this->model->delete($id)) {
-                $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
-            } else {
-                $this->session->set_flashdata('msgError', 'Data gagal dihapus');
-            }
             redirect($this->module);
         } else {
             redirect($this->module);
         }
+    }
+
+    public function delete() {
+        $config['table'] = "gear g";
+        $config['field'] = array(
+            array("title" => "name", "field" => "g.name"),
+            array("title" => "deskripsi", "field" => "g.description"),
+        );
+        parent::hapus($config);
     }
 
 }

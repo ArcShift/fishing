@@ -45,17 +45,7 @@ class MY_Controller extends CI_Controller {
         if ($this->module == $this->session->userdata('pagination')["module"]) {
             $pagination = $this->session->userdata('pagination');
         }
-        if ($this->input->post('read')) {
-            $this->session->set_userdata('id_nelayan', $this->input->post('read'));
-            $this->session->set_flashdata('id', $this->input->post('read'));
-            redirect('/' . $this->module . '/detail');
-        } else if ($this->input->post('edit')) {
-            $this->session->set_flashdata('id', $this->input->post('edit'));
-            redirect('/' . $this->module . '/edit');
-        } else if ($this->input->post('initDelete')) {
-            $this->session->set_flashdata('id', $this->input->post('initDelete'));
-            redirect('/' . $this->module . '/delete');
-        } else if ($this->input->post('page')) {
+        if ($this->input->post('page')) {
             $pagination['page'] = $this->input->post('page');
         } else if ($this->input->post('cari')) {
             $pagination['page'] = 1;
@@ -92,14 +82,30 @@ class MY_Controller extends CI_Controller {
         $this->render('template/create', FALSE);
     }
 
+    protected function edit() {
+        if ($this->input->post('edit')) {
+            $id = $this->input->post('edit');
+        } else if ($this->input->post('update')) {
+            if ($this->model->update()) {
+                redirect($this->uri->segment(1));
+            } else {
+                $id = $this->input->post('update');
+            }
+        } else {
+            redirect($this->uri->segment(1));
+        }
+        $this->subTitle = 'edit';
+        $this->data['data'] = $this->model->read($id);
+        $this->render('edit');
+    }
+
     protected function hapus($config) {
         $this->subTitle = "delete";
-        if (!empty($this->session->flashdata('id'))) {
+        if ($this->input->post('initDelete')) {
             $this->data['config'] = $config;
             $this->data['data'] = $this->b_model->read($config);
             $this->render('template/delete', FALSE);
         } else if ($this->input->post('delete')) {
-            $id = $this->input->post('delete');
             if ($this->b_model->delete($config)) {
                 $this->session->set_flashdata('msgSuccess', 'Data berhasil dihapus');
             } else {

@@ -54,8 +54,6 @@ class Base_model extends CI_Model {
     }
 
     function insert($config) {
-//        die(print_r($input));
-//        die(print_r($this->input->post()));
         foreach ($config['input'] as $in) {
             $this->db->set($in['field'], $this->input->post($in['id']));
         }
@@ -72,7 +70,7 @@ class Base_model extends CI_Model {
                 $this->db->join($j['table'], $j['relation']);
             }
         }
-        $this->db->where(substr($config['table'], strpos($config['table'], " ") + 1) . '.' . $idField, $this->session->flashdata('id'));
+        $this->db->where(substr($config['table'], strpos($config['table'], " ") + 1) . '.' . $idField, $this->input->post('initDelete'));
         return $this->db->get($config['table'])->row_array();
     }
 

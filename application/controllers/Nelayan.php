@@ -10,8 +10,8 @@ class Nelayan extends MY_Controller {
     }
 
     public function index() {
-        $config= array();
-        $config['search']=array('nama', 'username', 'email');
+        $config = array();
+        $config['search'] = array('nama', 'username', 'email');
         $config['table'] = "fisherman n";
         $config['column'] = array(
             array("title" => "nama", "field" => "n.name"),
@@ -24,7 +24,7 @@ class Nelayan extends MY_Controller {
 
     public function detail() {
         $this->subTitle = "Detail";
-        $id_nelayan = $this->session->userdata('id_nelayan'); 
+        $id_nelayan = $this->input->post('read');
         if (empty($id_nelayan) && !isset($id_nelayan)) {
             redirect('nelayan');
         }
@@ -32,10 +32,11 @@ class Nelayan extends MY_Controller {
         $this->data['pengaduan'] = $this->model->read($id_nelayan, 'pengaduan');
         $this->data['postingan'] = $this->model->read($id_nelayan, 'postingan');
         $this->data['tangkapan_ikan'] = $this->model->read($id_nelayan, 'tangkapan ikan');
-        
         $this->render('read');
     }
+
     public function delete() {
         $this->render('delete');
     }
+
 }
