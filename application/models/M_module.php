@@ -9,7 +9,7 @@ class M_module extends CI_Model {
         if($this->input->post("induk")){
             $data['parent']=$this->input->post("induk");
         }
-        if ($this->db->insert("modul", $data)) {
+        if ($this->db->insert("module", $data)) {
             $this->session->set_userdata('menu', $this->model->read());
             return 'success';
         } else {
@@ -19,8 +19,8 @@ class M_module extends CI_Model {
 
     public function read() {
         $this->db->select("m.id, m.nama, p.nama AS induk, p.id AS indukId");
-        $this->db->join("modul p", "m.parent=p.id", "left");
-        return $this->db->get("modul m")->result_array();
+        $this->db->join("module p", "m.parent=p.id", "left");
+        return $this->db->get("module m")->result_array();
     }
 
     public function update() {
@@ -29,7 +29,7 @@ class M_module extends CI_Model {
 
     public function delete() {
         $this->db->where("id", $this->input->post("id"));
-        if ($this->db->delete("modul")) {
+        if ($this->db->delete("module")) {
             $this->session->set_userdata('menu', $this->model->read());
             return 'success';
         } else {
@@ -38,7 +38,7 @@ class M_module extends CI_Model {
     }
 
     public function structure() {
-        $result = $this->db->get("modul m")->result_array();
+        $result = $this->db->get("module m")->result_array();
     }
 
     public function sort() {

@@ -23,7 +23,7 @@ $widgets = array(
 ?>
 <div class="row">
     <?php foreach ($widgets as $w) { ?>
-        <?php if (in_array($w['module'], $aksesModule)) { ?>
+        <?php if (isset($user['access'][$w['module']])) { ?>
             <div class="col-sm-6 col-lg-3">
                 <div class="widget widget-stat widget-stat-right bg-<?php echo $w['color'] ?> text-white">
                     <!--<div class="widget-stat-btn"><a href="javascript:;" data-click="widget-reload"><i class="fa fa-redo"></i></a></div>-->

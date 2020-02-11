@@ -11,12 +11,19 @@ class Login extends CI_Controller {
             redirect('dashboard');
         } else if ($this->input->post('login')) {
             $this->load->model('m_login', 'model');
-            if ($this->model->login()) {
-                $this->load->model('m_module');
-                $this->session->set_userdata('menu', $this->m_module->read());
+            $this->load->model('m_role');
+            $result = $this->model->login();
+            if ($result != false) {
+                $data = array(
+                    'userId' => $result['id'],
+                    'username' => $result['nama'],
+                    'role' => $result['role'],
+                    'access' => $this->m_role->user_access($result['id']),
+                );
+                $this->session->set_userdata('user', $data);
                 redirect('dashboard');
             }
-        } elseif ($this->input->post('resetPass')) {
+        } elseif ($this->input->post('resetPass')) {//UNDONE
             $this->load->library('email');
             $config['protocol'] = 'smtp';
             $config['smtp_host'] = 'your host';
@@ -44,4 +51,5 @@ class Login extends CI_Controller {
         }
         $this->load->view('login-adm-source');
     }
+
 }

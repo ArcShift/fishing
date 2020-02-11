@@ -9,17 +9,11 @@ class M_login extends CI_Model {
         $this->db->join('role r', 'r.id = u.idUserType');
         $result = $this->db->get('user u');
         if ($result->num_rows()) {
-            $result = $result->result_array()[0];
-            $data = array(
-                'userId' => $result['id'],
-                'user' => $result['nama'],
-                'role' => $result['role']
-            );
-            $this->session->set_userdata($data);
-            return true;
+            return $result->row_array();
         } else {
             return false;
         }
     }
+    
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-class User extends MY_Controller {
+class Admin extends MY_Controller {
 
-    protected $module = "user";
+    protected $module = "admin";
 
     public function __construct() {
         parent::__construct();

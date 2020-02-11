@@ -88,7 +88,7 @@
                         <li class="dropdown navbar-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png" alt="" /></span>
-                                <span class="hidden-xs"><?php echo $this->session->userdata('user') ?></span> <b class="caret"></b>
+                                <span class="hidden-xs"><?php echo $user['username'] ?></span> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="<?php echo site_url('akun') ?>">Edit Profil</a></li>
@@ -115,7 +115,7 @@
                             </div>
                             <div class="info">
                                 <div class="name dropdown">
-                                    <a href="javascript:;" data-toggle="dropdown"><?php echo $this->session->userdata('user') ?><b class="caret"></b></a>
+                                    <a href="javascript:;" data-toggle="dropdown"><?php echo $user['username'] ?><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="<?php echo site_url('akun') ?>">Edit Profil</a></li>
 <!--                                        <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
@@ -125,13 +125,13 @@
                                         <li><a href="<?php echo site_url('akun/logout') ?>">Log Out</a></li>
                                     </ul>
                                 </div>
-                                <div class="position"><?php echo $this->session->userdata('role') ?></div>
+                                <div class="position"><?php echo $user['role'] ?></div>
                             </div>
                         </li>
                         <li class="nav-header">Navigation</li>
                         <?php
                         $modules = array(
-                            array("id" => "adm", "nama" => "user", "icon" => "user-secret"),
+                            array("id" => "adm", "nama" => "admin","title"=>"User", "icon" => "user-secret"),
                             array("id" => "fsrm", "nama" => "nelayan", "icon" => "user"),
                             array("id" => "map", "nama" => "peta", "icon" => "map-marked"),
                             array("id" => "fish", "nama" => "ikan", "icon" => "fish"),
@@ -140,14 +140,15 @@
                             array("id" => "", "nama" => "peralatan", "icon" => "toolbox"),
                             array("id" => "", "nama" => "pengumuman", "icon" => "bullhorn"),
                             array("id" => "", "nama" => "dokumen", "icon" => "file"),
-                            array("id" => "", "nama" => "upt", "title"=>"Rekap Data UPT", "icon" => "university")
+                            array("id" => "", "nama" => "upt", "title"=>"UPT", "icon" => "university"),
+                            array("id" => "", "nama" => "rekap_upt", "title"=>"Rekap Data UPT", "icon" => "university"),
                         );
                         ?>
                         <?php foreach ($modules as $m) { ?>
                         <?php
                             if($m['nama']==$module)$activeModule=$m;
                         ?>
-                            <?php if (in_array($m['nama'], $aksesModule)) { ?>
+                            <?php if (isset($user['access'][$m['nama']])) { ?>
                                 <li class="<?php echo $m['nama'] == $this->uri->segment(1) ? 'active' : '' ?>">
                                     <a href="<?php echo site_url($m['nama']) ?>">
                                         <i class="fa fa-<?php echo $m['icon'] ?>"></i>
