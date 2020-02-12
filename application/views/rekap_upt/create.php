@@ -2,7 +2,7 @@
 //print_r($this->input->post());
 ?>
 <div style="margin-bottom: 5px;">
-<a href="<?php echo site_url('upt/import_upt'); ?>" class="btn btn-primary">Import Data</a>
+<a href="<?php echo site_url($module.'/import_upt'); ?>" class="btn btn-primary">Import Data</a>
 </div>
 <form class="form-horizontal" method="post">
     <div class="panel panel-default">

@@ -88,7 +88,7 @@
                         <li class="dropdown navbar-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png" alt="" /></span>
-                                <span class="hidden-xs"><?php echo $user['username'] ?></span> <b class="caret"></b>
+                                <span class="hidden-xs"><?php echo $user['name'] ?></span> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="<?php echo site_url('akun') ?>">Edit Profil</a></li>
@@ -115,7 +115,7 @@
                             </div>
                             <div class="info">
                                 <div class="name dropdown">
-                                    <a href="javascript:;" data-toggle="dropdown"><?php echo $user['username'] ?><b class="caret"></b></a>
+                                    <a href="javascript:;" data-toggle="dropdown"><?php echo $user['name'] ?><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="<?php echo site_url('akun') ?>">Edit Profil</a></li>
 <!--                                        <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
@@ -148,7 +148,7 @@
                         <?php
                             if($m['nama']==$module)$activeModule=$m;
                         ?>
-                            <?php if (isset($user['access'][$m['nama']])) { ?>
+                            <?php if (!empty($user['access'][$m['nama']])) { ?>
                                 <li class="<?php echo $m['nama'] == $this->uri->segment(1) ? 'active' : '' ?>">
                                     <a href="<?php echo site_url($m['nama']) ?>">
                                         <i class="fa fa-<?php echo $m['icon'] ?>"></i>

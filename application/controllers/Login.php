@@ -15,8 +15,8 @@ class Login extends CI_Controller {
             $result = $this->model->login();
             if ($result != false) {
                 $data = array(
-                    'userId' => $result['id'],
-                    'username' => $result['nama'],
+                    'id' => $result['id'],
+                    'name' => $result['nama'],
                     'role' => $result['role'],
                     'access' => $this->m_role->user_access($result['id']),
                 );

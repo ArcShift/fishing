@@ -71,8 +71,8 @@ class M_rekap_upt extends CI_Model {
 
     function insert_data_upt($data) {
         $this->db->trans_begin();
-        $this->db->query("INSERT INTO rekap_upt (tanggal, nama_kapal, id_gear, jenis_kapal, id_ikan, volume, harga_lelang) Values
-        (?,?,?,?,?,?,?)
+        $this->db->query("INSERT INTO rekap_upt (tanggal, nama_kapal, id_gear, jenis_kapal, id_ikan, volume, harga_lelang, idAdmin) Values
+        (?,?,?,?,?,?,?,?)
       ", $data);
 
         if ($this->db->trans_status() == false) {

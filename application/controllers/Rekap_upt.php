@@ -1,4 +1,5 @@
 <?php
+require './vendor/autoload.php';
 
 class Rekap_upt extends MY_Controller {
 
@@ -132,10 +133,10 @@ class Rekap_upt extends MY_Controller {
                             "id_gear" => $alat_tangkap,
                             "jenis_kapal" => $rowData[0][3],
                             "id_ikan" => !empty($id_ikan) ? $id_ikan : 0,
-                            "volume" => $rowData[0][19],
-                            "harga_lelang" => $rowData[0][20],
+                            "volume" => $rowData[0][20],
+                            "harga_lelang" => $rowData[0][19],
+                            "user" => $this->user['id'],
                         );
-
                         $status = $this->model->insert_data_upt($data);
                     }
                 }
@@ -148,7 +149,7 @@ class Rekap_upt extends MY_Controller {
                 //---------------------------
                 unlink(FCPATH . $pathfile);
 
-                redirect('upt');
+                redirect($this->module);
             }
         }
         $this->render('import_upt');
