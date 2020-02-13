@@ -52,7 +52,7 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                     <?php if (isset($config['peta'])) { ?>
                         <a class="btn btn-primary fa fa-map pull-right" title="Lihat Peta" href="<?php echo site_url($module . '/peta'); ?>"> Peta</a>
                     <?php } ?>
-                    <?php if (in_array('create', $config['crud'])) { ?>
+                    <?php if ((in_array('create', $config['crud']))&(isset($user['access'][$module]['create']))) { ?>
                         <a class="btn btn-primary fa fa-plus pull-right" href="<?php echo site_url($module . '/create'); ?>" title="Tambah Data"> Tambah</a>
                     <?php } ?>
                 </div>
@@ -86,13 +86,13 @@ $number = 1 + (($pagination['page'] - 1) * $this->config->item('page_limit'));
                             <?php } ?>
                             <?php if (in_array('read', $config['crud']) | in_array('edit', $config['crud']) | in_array('delete', $config['crud'])) { ?>
                                 <td class="pull-right">
-                                    <?php if (in_array('read', $config['crud'])) { ?>
+                                    <?php if ((in_array('read', $config['crud']))&(isset($user['access'][$module]['read']))) { ?>
                                     <button name="read" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-search" title="Lihat Detail" formaction="<?php echo $module ?>/detail"> Lihat</button>
                                     <?php } ?>
-                                    <?php if (in_array('update', $config['crud'])) { ?>
+                                    <?php if ((in_array('update', $config['crud']))&(isset($user['access'][$module]['update']))) { ?>
                                         <button name="edit" value="<?php echo $d['id'] ?>" class="btn btn-primary fa fa-edit" title="Edit Data" formaction="<?php echo $module ?>/edit"> Ubah</button>
                                     <?php } ?>
-                                    <?php if (in_array('delete', $config['crud'])) { ?>                                    
+                                    <?php if ((in_array('delete', $config['crud']))&(isset($user['access'][$module]['delete']))) { ?>                                    
                                         <button name="initDelete" value="<?php echo $d['id'] ?>" class="btn btn-danger fa fa-trash" title="Hapus Data" formaction="<?php echo $module ?>/delete"> Hapus</button>
                                     <?php } ?>
                                 </td>

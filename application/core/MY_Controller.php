@@ -6,6 +6,7 @@ class MY_Controller extends CI_Controller {
     protected $subTitle = null;
     protected $data = array();
     protected $user = array();
+
 //    protected $aksesModule = array(
 //        "Super Admin" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting', 'upt', 'role', 'rekap_upt'),
 //        "Admin Perikanan" => array('dashboard', 'akun', 'user', 'nelayan', 'ikan', 'pengaduan', 'tangkapan', 'peta', 'peralatan', 'pengumuman', 'dokumen', 'setting'),
@@ -16,19 +17,20 @@ class MY_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->user=$this->session->userdata('user');
+        $this->user = $this->session->userdata('user');
         if (!$this->user) {//cek login user
             redirect('login');
-        } else if (!isset ($this->user['access'][$this->module])) {
-            print_r($this->session->userdata('user'));
-            die('no access');
+        } else if (!isset($this->user['access'][$this->module])) {
+            if (($this->module != 'role')&($this->module != 'akun')) {
+                die('no access');
+            }
         } else {
             $this->load->model("base_model", "b_model");
         }
     }
 
     protected function render($view, $includeModule = true) {
-        $this->data['user']= $this->user;
+        $this->data['user'] = $this->user;
         $this->data['module'] = $this->module;
         $this->data['subTitle'] = $this->subTitle;
         if ($includeModule) {
