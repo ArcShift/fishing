@@ -20,9 +20,9 @@ class Admin extends MY_Controller {
         );
         $config['table'] = "user u";
         $config['column'] = array(
-            array("title" => "full name", "field" => "u.full_name"),
+            array("title" => "nama lengkap", "field" => "u.full_name"),
             array("title" => "username", "field" => "u.nama"),
-            array("title" => "type", "field" => "r.nama"),
+            array("title" => "tipe user", "field" => "r.nama"),
             array("title" => "email", "field" => "u.email"),
             array("title" => "no HP", "field" => "u.no_hp"),
         );

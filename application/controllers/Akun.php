@@ -10,9 +10,9 @@ class Akun extends MY_Controller {
         $this->load->library('form_validation');
     }
 
-    public function index() {//profile
-//        $this->subTitle = "Profile";
+    public function index() {
         $this->load->helper(array('form', 'url'));
+        $this->data['data'] = $this->model->detail($this->user['id']);
         if ($this->input->post("changePass")) {
             $this->form_validation->set_rules('pass', 'Password Lama', 'required|callback_check_pass');
             $this->form_validation->set_rules('newPass', 'Password Baru', 'required');
@@ -25,19 +25,21 @@ class Akun extends MY_Controller {
                 }
             }
         } elseif ($this->input->post("saveData")) {
-            $this->form_validation->set_rules('nama', 'Nama', 'required|is_unique[user.nama]');
-            if ($this->form_validation->run()) {
+            $this->form_validation->set_rules('fullName', 'Nama Lengkap', 'max_length[50]');
+            if ($this->input->post('nama') != $this->data['data']['nama']) {
+                $this->form_validation->set_rules('nama', 'Nama', 'required|max_length[45]|is_unique[user.nama]');
+            }
+            $this->form_validation->set_rules('email', 'Email', 'max_length[50]|valid_email');
+            $this->form_validation->set_rules('noHP', 'Nomor HP', 'max_length[20]');
+            if ($this->form_validation->run() != false) {
                 if (!$this->model->updateData()) {
-                    echo "gagal update data";
+                    $this->session->set_flashdata('msgError', 'Gagal mengupdate data');
                 } else {
-                    if ($this->input->post("id") === $this->session->userId) {
-                        $this->session->set_userdata("user", $this->input->post("nama"));
-                        $this->session->set_flashdata('msgSuccess', 'Data berhasil diupdate');
-                    }
+                    $this->session->set_userdata("user['name']", $this->input->post("nama"));
+                    $this->session->set_flashdata('msgSuccess', 'Data berhasil diupdate');
                 }
             }
         }
-        $this->data['data1'] = $this->model->detail($this->session->userId);
         $this->render('profil');
     }
 
