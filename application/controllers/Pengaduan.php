@@ -10,7 +10,7 @@ class Pengaduan extends MY_Controller {
     }
 
     public function index() {
-        $config['search']=array('nelayan', 'title', 'latitude', 'longitude');
+        $config['search'] = array('nelayan', 'title', 'latitude', 'longitude');
         $config['filter'] = array(
             array("title" => "status", "type" => "array", "data" => array(
                     'pending', 'diterima', 'ditolak', 'sedang ditangani', 'selesai'
@@ -46,7 +46,12 @@ class Pengaduan extends MY_Controller {
     public function edit() {
         if ($this->input->post('save')) {
             if ($this->model->edit()) {
-                $this->session->set_flashdata('msgSuccess', 'Status berhasil diupdate');
+                $notif = $this->send_notif('Pengaduan', 'nelayan id: '.$this->input->post('id'). ' pengaduan '. $this->input->post('status'));
+                if ($notif == TRUE) {
+                    $this->session->set_flashdata('msgSuccess', 'Status berhasil diupdates');
+                } else {
+                    $this->session->set_flashdata('msgError', $notif);
+                }
                 redirect($this->module);
             } else {
                 $this->session->set_flashdata('msgError', 'Status gagal diupdate');
@@ -61,10 +66,13 @@ class Pengaduan extends MY_Controller {
         $this->data['dataFiles'] = $result['files'];
         $this->render('edit');
     }
+
     public function peta() {
         $this->render('peta');
     }
-    public function koordinat(){
+
+    public function koordinat() {
         echo json_encode($this->model->koordinat());
     }
+
 }

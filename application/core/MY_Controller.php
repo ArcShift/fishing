@@ -21,7 +21,7 @@ class MY_Controller extends CI_Controller {
         if (!$this->user) {//cek login user
             redirect('login');
         } else if (!isset($this->user['access'][$this->module])) {
-            if (($this->module != 'role')&($this->module != 'akun')) {
+            if (($this->module != 'role') & ($this->module != 'akun')) {
                 die('no access');
             }
         } else {
@@ -136,6 +136,52 @@ class MY_Controller extends CI_Controller {
         } else {
             return true;
         }
+    }
+
+    protected function send_notif($title, $message) {
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $headers = array(
+            //authorizationkey : kunci server cloud messaging -> cara mendapatkannya pergi console.firebase.google.com
+            'Authorization:key = AAAAjkAyl2g:APA91bENJ2Vo6pP4-wGu4GykBFhEf31bxyqAI7iZYTpohEX_Q9QQMM0-qaZ_--OJnWIercO69LBR2ij3huXkmG4QaOqzJEL_djSHGTZvfwdKS9LZeF4xPnLMbXa5qv-H2klLe7WMyur6',
+            'Content-Type: application/json'
+        );
+        //yang akan tampil di notifikasi android
+        $notification = array(
+            'title' => $title,
+            'body' => $message,
+            'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+            'sound' => "default"
+        );
+        //bisa digunakan untuk membawa data dari database, seperti membawa parameter user_id
+        $data = array(
+            'data_1' => "data_1",
+            'data_2' => "data_2",
+            'data_3' => "data_3",
+            'data_4' => "data_4"
+        );
+        $fields = array(
+            // to : adalah token firebase tujuan untuk hp android yang akan dikirimkan notifikasi
+            'to' => "",
+            'priority' => 'high',
+            'notification' => $notification,
+            'data' => $data
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        $result = curl_exec($ch);
+//        die('gagal');
+        if ($result === FALSE) {
+            return 'Curl failed: ' . curl_error($ch);
+        }else{
+            return TRUE;
+        }
+//        curl_close($ch);
     }
 
 }
