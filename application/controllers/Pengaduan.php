@@ -47,9 +47,17 @@ class Pengaduan extends MY_Controller {
         if ($this->input->post('save')) {
             if ($this->model->edit()) {
                 $result = $this->model->get($this->input->post('id'));
-                $notif = $this->send_notif($result['id_fisherman'], "Status Pengaduan", 'Pengaduanmu "'. $result['title']. '" '.$this->input->post('status'));
+                $notif = $this->send_notif($result['id_fisherman'], "Status Pengaduan", 'Pengaduanmu "' . $result['title'] . '" ' . $this->input->post('status'));
                 if ($notif == TRUE) {
-                    $this->session->set_flashdata('msgSuccess', 'Status berhasil diupdates');
+                    $data = array(
+                        'id_complaintment' => $result['id'],
+                        'message' => $this->input->post('status'),
+                    );
+                    if ($this->model->notif($data)) {
+                        $this->session->set_flashdata('msgSuccess', 'Status berhasil diupdates');
+                    } else {
+                        $this->session->set_flashdata('msgError', 'Insert Error');
+                    }
                 } else {
                     $this->session->set_flashdata('msgError', $notif);
                 }

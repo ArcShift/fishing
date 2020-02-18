@@ -29,5 +29,10 @@ class M_pengaduan extends CI_Model {
         $this->db->select('longitude, latitude, description, status');
         return $this->db->get('fisherman_complaintment')->result_array();
     }
+    
+    function notif($data) {
+        $this->db->set($data);
+        return $this->db->insert('fisherman_notification_complaintment');
+    }
 
 }
