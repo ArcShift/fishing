@@ -16,7 +16,10 @@ class M_nelayan extends CI_Model {
         $result['data']=$this->db->get()->result_array();
         return $result;
     }
-
+    function get($id) {
+        $this->db->where('id', $id);
+        return $this->db->get('fisherman');
+    }
     public function read($id, $method=null) {
         if($method == 'biodata'){
             $this->db->select('f.name, f.email, f.phone_number, COUNT(fp.id) AS postingan, f.bio, f.username, f.url_photo');

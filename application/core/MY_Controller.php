@@ -138,7 +138,7 @@ class MY_Controller extends CI_Controller {
         }
     }
 
-    protected function send_notif($title, $message) {
+    protected function send_notif($userId, $title, $message) {
         $url = 'https://fcm.googleapis.com/fcm/send';
         $headers = array(
             //authorizationkey : kunci server cloud messaging -> cara mendapatkannya pergi console.firebase.google.com
@@ -159,6 +159,10 @@ class MY_Controller extends CI_Controller {
             'data_3' => "data_3",
             'data_4' => "data_4"
         );
+        $this->load->model('m_nelayan');
+        $result = $this->m_nelayan->get($userId);
+        echo 'get';
+        die(print_r($result));
         $fields = array(
             // to : adalah token firebase tujuan untuk hp android yang akan dikirimkan notifikasi
             'to' => "",
@@ -178,7 +182,7 @@ class MY_Controller extends CI_Controller {
 //        die('gagal');
         if ($result === FALSE) {
             return 'Curl failed: ' . curl_error($ch);
-        }else{
+        } else {
             return TRUE;
         }
 //        curl_close($ch);

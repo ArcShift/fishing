@@ -20,7 +20,7 @@ class Rekap_upt extends MY_Controller {
             array("table" => "fish f", "relation" => "f.id = ru.id_ikan"),
         );
         $config['column'] = array(
-            array("title" => "tanggal", "field" => "ru.tanggal"),
+            array("title" => "tanggal", "field" => "ru.date"),
             array("title" => "nama kapal", "field" => "ru.nama_kapal"),
             array("title" => "alat", "field" => "g.name"),
             array("title" => "jenis kapal", "field" => "ru.jenis_kapal"),
