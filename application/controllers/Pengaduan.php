@@ -46,7 +46,8 @@ class Pengaduan extends MY_Controller {
     public function edit() {
         if ($this->input->post('save')) {
             if ($this->model->edit()) {
-                $notif = $this->send_notif('Pengaduan', 'nelayan id: '.$this->input->post('id'). ' pengaduan '. $this->input->post('status'));
+                $result = $this->model->get($this->input->post('id'));
+                $notif = $this->send_notif($result['id_fisherman'], "Status Pengaduan", 'Pengaduanmu "'. $result['title']. '" '.$this->input->post('status'));
                 if ($notif == TRUE) {
                     $this->session->set_flashdata('msgSuccess', 'Status berhasil diupdates');
                 } else {

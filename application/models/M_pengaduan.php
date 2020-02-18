@@ -14,6 +14,11 @@ class M_pengaduan extends CI_Model {
         return $result;
     }
 
+    function get($id) {
+        $this->db->where('id', $id);
+        return $this->db->get('fisherman_complaintment')->row_array();
+    }
+
     function edit() {
         $this->db->set("status", $this->input->post("status"));
         $this->db->where("id", $this->input->post("id"));

@@ -18,7 +18,9 @@ class M_nelayan extends CI_Model {
     }
     function get($id) {
         $this->db->where('id', $id);
-        return $this->db->get('fisherman');
+        $result= $this->db->get('fisherman')->row_array();
+//        die($this->db->last_query());
+        return $result;
     }
     public function read($id, $method=null) {
         if($method == 'biodata'){
