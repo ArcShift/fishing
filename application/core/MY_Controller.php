@@ -161,7 +161,7 @@ class MY_Controller extends CI_Controller {
         );
         $this->load->model('m_nelayan');
         $result = $this->m_nelayan->get($userId);
-        die(print_r($result));
+//        die(print_r($result));
         $fields = array(
             // to : adalah token firebase tujuan untuk hp android yang akan dikirimkan notifikasi
             'to' => $result['mobile_token'],
