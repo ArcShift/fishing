@@ -127,82 +127,82 @@ if (!empty($dataGrafik)) {
     <?php } ?>
 <?php } ?>
 <?php if ($user['role'] == "UPT") { ?>
-    <!--TABLE UPT: IKAN-->
-    <div class="panel panel-inverse">
-        <div class="panel-heading">
-            <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
-            </div>
-            <h4 class="panel-title">          
-                Bongkar Muat per Ikan          
-            </h4>
-        </div>
-        <div class="panel-body">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr class="inverse">
-                        <th>Ikan</th>
-                        <th>Volume</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $vol_per_ikan = 0 ?>
-                    <?php foreach ($upt_ikan as $ui) { ?>
-                        <tr>
-                            <td><?php echo $ui['ikan'] ?></td>
-                            <td><?php echo $ui['vol'] ?></td>
+    <div class="row">
+        <div class="col-sm-6">
+            <!--TABLE UPT: IKAN-->
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
+                    <h4 class="panel-title">          
+                        Bongkar Muat per Ikan          
+                    </h4>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="inverse">
+                            <th>Ikan</th>
+                            <th>Volume</th>
                         </tr>
-                        <?php $vol_per_ikan += $ui['vol'] ?>
-                    <?php } ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Total</th>
-                        <th><?php echo $vol_per_ikan ?></th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
-    <!--TABLE UPT: KAPAL-->
-    <div class="panel panel-inverse">
-        <div class="panel-heading">
-            <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
-            </div>
-            <h4 class="panel-title">              
-                Bongkar Muat per Kapal        
-            </h4>
-        </div>
-        <div class="panel-body">
-            <table class="table">
-                <thead>
-                    <tr class="inverse">
-                        <th>Kapal</th>
-                        <th>Volume</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $vol_per_kapal = 0 ?>
-                    <?php foreach ($upt_kapal as $ui) { ?>
+                    </thead>
+                    <tbody>
+                        <?php $vol_per_ikan = 0 ?>
+                        <?php foreach ($upt_ikan as $ui) { ?>
+                            <tr>
+                                <td><?php echo $ui['ikan'] ?></td>
+                                <td><?php echo $ui['vol'] ?></td>
+                            </tr>
+                            <?php $vol_per_ikan += $ui['vol'] ?>
+                        <?php } ?>
+                    </tbody>
+                    <tfoot>
                         <tr>
-                            <td><?php echo $ui['nama_kapal'] ?></td>
-                            <td><?php echo $ui['vol'] ?></td>
+                            <th>Total</th>
+                            <th><?php echo $vol_per_ikan ?></th>
                         </tr>
-                        <?php $vol_per_kapal += $ui['vol'] ?>
-                    <?php } ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Total</th>
-                        <th><?php echo $vol_per_kapal ?></th>
-                    </tr>
-                </tfoot>
-            </table>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <!--TABLE UPT: KAPAL-->
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
+                    <h4 class="panel-title">              
+                        Bongkar Muat per Kapal        
+                    </h4>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr class="inverse">
+                            <th>Kapal</th>
+                            <th>Volume</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $vol_per_kapal = 0 ?>
+                        <?php foreach ($upt_kapal as $ui) { ?>
+                            <tr>
+                                <td><?php echo $ui['nama_kapal'] ?></td>
+                                <td><?php echo $ui['vol'] ?></td>
+                            </tr>
+                            <?php $vol_per_kapal += $ui['vol'] ?>
+                        <?php } ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Total</th>
+                            <th><?php echo $vol_per_kapal ?></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 <?php } ?>

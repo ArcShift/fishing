@@ -16,7 +16,7 @@ class M_rekap_upt extends CI_Model {
 
     function create() {
         $input = $this->input->post();
-        $this->db->set('tanggal', $input['tanggal']);
+        $this->db->set('date', $input['tanggal']);
         $this->db->set('nama_kapal', $input['nama_kapal']);
         $this->db->set('id_gear', $input['jenis_alat_tangkap']);
         $this->db->set('jenis_kapal', $input['jenis_kapal']);
@@ -32,7 +32,7 @@ class M_rekap_upt extends CI_Model {
 
     function update() {
         $in = $this->input->post();
-        $this->db->set('tanggal', $in['tanggal']);
+        $this->db->set('date', $in['tanggal']);
         $this->db->set('nama_kapal', $in['nama_kapal']);
         $this->db->set('id_gear', $in['jenis_alat_tangkap']);
         $this->db->set('jenis_kapal', $in['jenis_kapal']);
@@ -71,7 +71,7 @@ class M_rekap_upt extends CI_Model {
 
     function insert_data_upt($data) {
         $this->db->trans_begin();
-        $this->db->query("INSERT INTO rekap_upt (tanggal, nama_kapal, id_gear, jenis_kapal, id_ikan, volume, harga_lelang, idAdmin) Values
+        $this->db->query("INSERT INTO rekap_upt (date, nama_kapal, id_gear, jenis_kapal, id_ikan, volume, harga_lelang, idAdmin) Values
         (?,?,?,?,?,?,?,?)
       ", $data);
 

@@ -52,7 +52,7 @@ class Rekap_upt extends MY_Controller {
             array("table" => "fish f", "relation" => "f.id = ru.id_ikan"),
         );
         $config['field'] = array(
-            array("title" => "tanggal", "field" => "ru.tanggal"),
+            array("title" => "tanggal", "field" => "ru.date"),
             array("title" => "nama kapal", "field" => "ru.nama_kapal"),
             array("title" => "alat", "field" => "g.name"),
             array("title" => "jenis kapal", "field" => "ru.jenis_kapal"),
@@ -128,12 +128,12 @@ class Rekap_upt extends MY_Controller {
 
                     if (isset($rowData[0][1]) && $rowData[0][1] != NULL) {
                         $data = array(
-                            "tanggal" => $tanggal,
+                            "date" => $tanggal,
                             "nama_kapal" => $rowData[0][1],
                             "id_gear" => $alat_tangkap,
                             "jenis_kapal" => $rowData[0][3],
                             "id_ikan" => !empty($id_ikan) ? $id_ikan : 0,
-                            "volume" => $rowData[0][20],
+                            "volume" => $rowData[0][18],
                             "harga_lelang" => $rowData[0][19],
                             "user" => $this->user['id'],
                         );
