@@ -10,7 +10,7 @@ class Dashboard extends MY_Controller {
     }
 
     public function index() {
-        $upt = $this->user['role'] == 'UPT' ? $this->user['id'] : false;
+        $upt = $this->user['role'] == 'UPT'|$this->user['role'] == 'Kabupaten' ? $this->user['id'] : false;
         //WIDGET
         $this->data['countFisherman'] = $this->model->countFisherman();
         $this->data['countFish'] = $this->model->countFish();

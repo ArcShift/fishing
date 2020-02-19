@@ -28,6 +28,9 @@ class Rekap_upt extends MY_Controller {
             array("title" => "volume", "field" => "ru.volume"),
             array("title" => "harga", "field" => "ru.harga_lelang"),
         );
+        if($this->user['role']=='UPT'|$this->user['role']=='Kabupaten'){
+            $this->db->where('ru.idAdmin',$this->user['id']);
+        }
         $config['crud'] = array('create', 'update', 'delete');
         parent::reads($config);
     }

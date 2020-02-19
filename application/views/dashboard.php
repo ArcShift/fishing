@@ -60,12 +60,13 @@ $widgets = array(
 </div>
 <!--GRAFIK==============================-->
 <?php
+$upt_kab = $user['role'] == 'UPT' | $user['role'] == 'Kabupaten' ? TRUE : FALSE;
 if (!empty($dataGrafik)) {
     $berat = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     foreach ($dataGrafik as $d) {
         $berat[$d['bulan_id'] - 1] = $d['jumlah_berat'];
     }
-    $grafikTitle = $user['role'] == 'UPT' ? 'Bongkar Muat' : 'Tangkapan';
+    $grafikTitle = $upt_kab ? 'Bongkar Muat' : 'Tangkapan';
     ?>
     <div class="panel bg-inverse text-white wrapper">
         <h3 class="text-white text-center">Grafik <?php echo $grafikTitle ?></h3>
@@ -126,7 +127,7 @@ if (!empty($dataGrafik)) {
         </div>
     <?php } ?>
 <?php } ?>
-<?php if ($user['role'] == "UPT") { ?>
+<?php if ($upt_kab) { ?>
     <div class="row">
         <div class="col-sm-6">
             <!--TABLE UPT: IKAN-->
