@@ -128,74 +128,68 @@ if (!empty($dataGrafik)) {
 <?php } ?>
 <?php if ($user['role'] == "UPT") { ?>
     <!--TABLE UPT: IKAN-->
-    <div class="panel panel-default">
+    <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4>              
-                Tabel Bongkar Muat per Ikan          
+            <h4 class="panel-title">              
+                Bongkar Muat per Ikan          
             </h4>
         </div>
-        <div class="panel-body">
-            <table id="data-table" data-order='[[1,"asc"]]' class="table table-bordered table-hover">
-                <thead>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="inverse">
+                    <th>Ikan</th>
+                    <th>Volume</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $vol_per_ikan = 0 ?>
+                <?php foreach ($upt_ikan as $ui) { ?>
                     <tr>
-                        <th>Ikan</th>
-                        <th>Volume</th>
+                        <td><?php echo $ui['ikan'] ?></td>
+                        <td><?php echo $ui['vol'] ?></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php $vol_per_ikan = 0 ?>
-                    <?php foreach ($upt_ikan as $ui) { ?>
-                        <tr>
-                            <td><?php echo $ui['ikan'] ?></td>
-                            <td><?php echo $ui['vol'] ?></td>
-                        </tr>
-                        <?php $vol_per_ikan += $ui['vol'] ?>
-                    <?php } ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Total</th>
-                        <th><?php echo $vol_per_ikan ?></th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="panel-footer"></div>
+                    <?php $vol_per_ikan += $ui['vol'] ?>
+                <?php } ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th><?php echo $vol_per_ikan ?></th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
     <!--TABLE UPT: KAPAL-->
-    <div class="panel panel-default">
+    <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4>              
-                Tabel Bongkar Muat per Kapal        
+            <h4 class="panel-title">              
+                Bongkar Muat per Kapal        
             </h4>
         </div>
-        <div class="panel-body">
-            <table class="table">
-                <thead>
+        <table class="table">
+            <thead>
+                <tr class="inverse">
+                    <th>Kapal</th>
+                    <th>Volume</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $vol_per_kapal = 0 ?>
+                <?php foreach ($upt_kapal as $ui) { ?>
                     <tr>
-                        <th>Kapal</th>
-                        <th>Volume</th>
+                        <td><?php echo $ui['nama_kapal'] ?></td>
+                        <td><?php echo $ui['vol'] ?></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php $vol_per_kapal = 0 ?>
-                    <?php foreach ($upt_kapal as $ui) { ?>
-                        <tr>
-                            <td><?php echo $ui['nama_kapal'] ?></td>
-                            <td><?php echo $ui['vol'] ?></td>
-                        </tr>
-                        <?php $vol_per_kapal += $ui['vol'] ?>
-                    <?php } ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Total</th>
-                        <th><?php echo $vol_per_kapal ?></th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="panel-footer"></div>
+                    <?php $vol_per_kapal += $ui['vol'] ?>
+                <?php } ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th><?php echo $vol_per_kapal ?></th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 <?php } ?>
 <!--PENGUMUMAN TERBARU-->
