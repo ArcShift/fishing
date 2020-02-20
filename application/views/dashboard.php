@@ -127,95 +127,75 @@ if (!empty($dataGrafik)) {
         </div>
     <?php } ?>
 <?php } ?>
-<?php if ($upt_kab) { ?>
+<?php
+if ($upt_kab) {
+    $table = array('ikan', 'kapal');
+    $table_upt = array($upt_ikan, $upt_kapal);
+    ?>
     <div class="row">
-        <div class="col-sm-6">
-            <!--TABLE UPT: IKAN-->
-            <div class="panel panel-inverse">
-                <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
+        <?php foreach ($table as $keyTb => $tb) { ?>
+            <div class="col-sm-6">
+                <div class="panel panel-inverse">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">          
+                            Bongkar Muat per <?php echo ucfirst($tb) ?>          
+                        </h4>
                     </div>
-                    <h4 class="panel-title">          
-                        Bongkar Muat per Ikan          
-                    </h4>
-                </div>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr class="inverse">
-                            <th>Ikan</th>
-                            <th>Volume</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $vol_per_ikan = 0 ?>
-                        <?php foreach ($upt_ikan as $ui) { ?>
-                            <tr>
-                                <td><?php echo $ui['ikan'] ?></td>
-                                <td><?php echo $ui['vol'] ?></td>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="inverse">
+                                <th><?php echo ucfirst($tb) ?></th>
+                                <th>Volume</th>
                             </tr>
-                            <?php $vol_per_ikan += $ui['vol'] ?>
-                        <?php } ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Total</th>
-                            <th><?php echo $vol_per_ikan ?></th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <!--TABLE UPT: KAPAL-->
-            <div class="panel panel-inverse">
-                <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
-                    <h4 class="panel-title">              
-                        Bongkar Muat per Kapal        
-                    </h4>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr class="inverse">
-                            <th>Kapal</th>
-                            <th>Volume</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $vol_per_kapal = 0 ?>
-                        <?php foreach ($upt_kapal as $ui) { ?>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sum_vol = 0;
+                            $sum_vol_more = 0;
+                            $has_more = count($table_upt[$keyTb]) > 6 ? TRUE : FALSE;
+                            foreach ($table_upt[$keyTb] as $key => $ui) {
+                                ?>
+                                <tr <?php echo ($key > 4 & $has_more) ? 'class="more_data"' : ''; ?>>
+                                    <td><?php echo $ui[$tb] ?></td>
+                                    <td><?php echo $ui['vol'] ?></td>
+                                </tr>
+                                <?php
+                                $sum_vol += $ui['vol'];
+                                $sum_vol_more += $key > 4 & $has_more ? $ui['vol'] : 0;
+                            }
+                            if ($has_more) {
+                                ?>
+                                <tr class="more_btn" onclick="more_data(this)">
+                                    <th>More ...</th>
+                                    <th><?php echo $sum_vol_more ?></th>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                        <tfoot>
                             <tr>
-                                <td><?php echo $ui['nama_kapal'] ?></td>
-                                <td><?php echo $ui['vol'] ?></td>
+                                <th>Total</th>
+                                <th><?php echo $sum_vol ?></th>
                             </tr>
-                            <?php $vol_per_kapal += $ui['vol'] ?>
-                        <?php } ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Total</th>
-                            <th><?php echo $vol_per_kapal ?></th>
-                        </tr>
-                    </tfoot>
-                </table>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
 <?php } ?>
 <!--PENGUMUMAN TERBARU-->
-<div class="panel panel-default">
+<div class="panel panel-inverse">
     <div class="panel-heading">
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
         </div>
-        <h4>Pengumuman</h4>
+        <h4 class="panel-title">Pengumuman Terbaru</h4>
     </div>
     <div class="panel-body">
         <h4><?php echo $pengumuman['title'] ?></h4>
@@ -226,33 +206,41 @@ if (!empty($dataGrafik)) {
     </div>
 </div>
 <!--METADATA PETA-->
-<div class="panel panel-default">
+<div class="panel panel-inverse">
     <div class="panel-heading">
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-inverse" data-click="panel-remove"><i class="fa fa-times"></i></a>
         </div>
-        <h4>Data Peta</h4>
+        <h4 class="panel-title">Data Peta</h4>
     </div>
-    <div class="panel-body">
-        <table class="table">
-            <thead>
+    <table class="table">
+        <thead>
+            <tr class="inverse">
+                <th>Sumber Data</th>
+                <th>Tgl Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($dataPeta as $p) { ?>
                 <tr>
-                    <th>Sumber Data</th>
-                    <th>Tgl Update</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($dataPeta as $p) { ?>
-                    <tr>
-                        <td><?php echo $p['source'] ?></td>
-                        <td><?php echo $p['date'] ?></td>
-                    </tr>   
-                <?php } ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="panel-footer">
-    </div>
+                    <td><?php echo $p['source'] ?></td>
+                    <td><?php echo $p['date'] ?></td>
+                </tr>   
+            <?php } ?>
+        </tbody>
+    </table>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.more_data').hide();
+    });
+    function more_data(obj) {
+        var tbody = $(obj).parent();
+        $(tbody.children('.more_data')).show();
+        $(obj).hide();
+    }
+    function ubah_status() {
+
+    }
+</script>

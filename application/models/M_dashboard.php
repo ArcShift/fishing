@@ -108,7 +108,7 @@ class M_dashboard extends CI_Model {
     }
 
     function upt_kapal($upt) {
-        $this->db->select('nama_kapal, SUM(ru.volume) AS vol');
+        $this->db->select('nama_kapal AS kapal, SUM(ru.volume) AS vol');
         $this->db->where('ru.idAdmin', $upt);
         $this->db->group_by('ru.nama_kapal');
         $result = $this->db->get('rekap_upt ru')->result_array();
