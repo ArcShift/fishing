@@ -14,9 +14,9 @@ class Admin extends MY_Controller {
 
     public function index() {
         $config = array();
-        $config['search']= array('username');
+        $config['search']= array('nama lengkap','username', 'email', '');
         $config['filter'] = array(
-            array("title" => "type", "type" => "select_query", "query" => "SELECT id AS k, nama AS v FROM role WHERE id<>1")
+            array("title" => "tipe user", "type" => "select_query", "query" => "SELECT id AS k, nama AS v FROM role WHERE id<>1")
         );
         $config['table'] = "user u";
         $config['column'] = array(

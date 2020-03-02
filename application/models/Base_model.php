@@ -20,10 +20,10 @@ class Base_model extends CI_Model {
         }
         if (isset($data['filter'])) {
             foreach ($data['filter'] as $f) {
-                if ($this->input->post($f['title'])) {
+                if ($this->input->post(str_replace(' ', '_', $f['title']))) {
                     foreach ($data['column'] as $c) {
                         if ($f['title'] == $c['title']) {
-                            $this->db->like($c['field'], $this->input->post($f['title']));
+                            $this->db->like($c['field'], $this->input->post(str_replace(' ', '_', $f['title'])));
                         }
                     }
                 }

@@ -205,6 +205,7 @@ if ($upt_kab) {
     <div class="panel-footer">
     </div>
 </div>
+<?php if (!empty($user['access']['peta'])) { ?>
 <!--METADATA PETA-->
 <div class="panel panel-inverse">
     <div class="panel-heading">
@@ -231,6 +232,7 @@ if ($upt_kab) {
         </tbody>
     </table>
 </div>
+<?php } ?>
 <script>
     $(document).ready(function () {
         $('.more_data').hide();
@@ -239,8 +241,5 @@ if ($upt_kab) {
         var tbody = $(obj).parent();
         $(tbody.children('.more_data')).show();
         $(obj).hide();
-    }
-    function ubah_status() {
-
     }
 </script>
