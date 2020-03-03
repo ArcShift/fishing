@@ -1,6 +1,5 @@
 <!--WIDGET-->
 <?php
-
 function parseWeight($weight) {
     if ($weight >= 1000) {
         return (int) ($weight / 1000) . ' ton';
@@ -24,13 +23,14 @@ function parseNominal($nominal) {
 
 $widgets = array(
     array("module" => "nelayan", "title" => "Nelayan", "color" => "primary", "icon" => "user", "value" => $countFisherman, "note" => "Nelayan baru: " . $newFisherman, "progress" => 50, "url" => "nelayan"),
-    array("module" => "tangkapan", "title" => "Total Tangkapan", "color" => "success", "icon" => "shopping-basket", "value" => parseWeight($totalCatch), "note" => "Minggu ini: " . parseWeight($weekCatch), "progress" => 50, "url" => "nelayan"),
+    array("module" => "tangkapan", "title" => "Tangkapan Nelayan", "color" => "success", "icon" => "shopping-basket", "value" => parseWeight($totalCatch), "note" => "Minggu ini: " . parseWeight($weekCatch), "progress" => 50, "url" => "nelayan"),
 //    array("module" => "user", "title" => "User", "color" => "success", "icon" => "user-secret", "value" => $countAdmin, "note" => "-", "progress" => 50, "url" => "admin"),
     array("module" => "ikan", "title" => "Database Ikan", "color" => "grey", "icon" => "fish", "value" => $countFish, "note" => "-", "progress" => 50, "url" => "ikan"),
     array("module" => "pengaduan", "title" => "Pengaduan", "color" => "inverse-dark", "icon" => "phone-volume", "value" => $countPengaduan, "note" => "-", "progress" => (80), "url" => "pengaduan"),
     array("module" => "rekap_upt", "title" => "Kapal", "color" => "purple", "icon" => "ship", "value" => $kapal, "note" => "-", "progress" => (80), "url" => "pengaduan"),
-    array("module" => "rekap_upt", "title" => "Total Tangkapan", "color" => "lime", "icon" => "shopping-basket", "value" => parseWeight($tangkapan), "note" => "-", "progress" => (80), "url" => "pengaduan"),
-    array("module" => "rekap_upt", "title" => "Total Nilai Produksi", "color" => "danger", "icon" => "dolly", "value" => "Rp. " . parseNominal($keuntungan), "note" => "-", "progress" => (80), "url" => "pengaduan"),
+    array("module" => "rekap_upt", "title" => "Bongkar Muat Kapal", "color" => "lime", "icon" => "dolly", "value" => parseWeight($tangkapan), "note" => "-", "progress" => (80), "url" => "pengaduan"),
+    array("module" => "rekap_upt", "title" => "Total Nilai Produksi", "color" => "danger", "icon" => "hand-holding-usd", "value" => "Rp. " . parseNominal($keuntungan), "note" => "-", "progress" => (80), "url" => "pengaduan"),
+    array("module" => "admin", "title" => "User UPT & KAB", "color" => "warning", "icon" => "user", "value" => $count_user_role['UPT'] + $count_user_role['Kabupaten'], "note" => $count_user_role['UPT']. ' UPT + '.$count_user_role['Kabupaten']. ' KAB', "progress" => (80), "url" => "pengaduan"),
 );
 ?>
 <div class="row">
@@ -106,7 +106,7 @@ if (!empty($dataGrafik)) {
         <div class="panel pagination-inverse bg-white clearfix no-rounded-corner">
             <table id="data-table" data-order='[[1,"asc"]]' class="table table-bordered table-hover">
                 <thead>
-                    <tr>
+                    <tr class="inverse">
                         <th class="width-100">Bulan</th>
                         <th><?php echo $grafikTitle ?> (Kg)</th>
                         <th>Postingan</th>

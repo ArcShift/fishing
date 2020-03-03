@@ -23,6 +23,7 @@ class Dashboard extends MY_Controller {
         $this->data['kapal'] = $this->model->kapal($upt);
         $this->data['tangkapan'] = $this->model->tangkapan($upt);
         $this->data['keuntungan'] = $this->model->keuntungan($upt);
+        $this->data['count_user_role'] = $this->model->count_user_role();
         //GRAFIK
         $result = $this->model->tahun($upt);
         if (!empty($result)) {//jika belum ada data

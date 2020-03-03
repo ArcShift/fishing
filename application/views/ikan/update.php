@@ -6,7 +6,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-2">
-                    <img src="https://inhabitat.com/wp-content/blogs.dir/1/files/2016/01/blue-fin-tuna-in-the-ocean-889x592.jpg" width="100%"/>
+                    <img src="<?php echo $data['url_photo']==null?'':base_url('upload/ikan/').$data['url_photo']?>" width="100%"/>
                     <button class="btn btn-primary" id="gantiFoto" type="button">Ganti Foto</button>
                 </div>
                 <div class="col-sm-10">

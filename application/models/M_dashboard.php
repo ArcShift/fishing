@@ -114,5 +114,16 @@ class M_dashboard extends CI_Model {
         $result = $this->db->get('rekap_upt ru')->result_array();
         return $result;
     }
-
+    
+    function count_user_role() {
+        $this->db->select('r.nama, COUNT(u.id) AS jumlah');
+        $this->db->join('user u', 'u.idUserType = r.id');
+        $this->db->group_by('r.id');
+        $result=$this->db->get('role r')->result_array();
+        $parse= array();
+        foreach ($result as $r) {
+            $parse[$r['nama']]=$r['jumlah'];
+        }
+        return $parse;
+    }
 }
