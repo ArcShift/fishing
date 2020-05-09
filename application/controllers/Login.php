@@ -49,7 +49,8 @@ class Login extends CI_Controller {
                 echo 'Gagal mengrim email. ' . $this->email->print_debugger();
             }
         }
-        $this->load->view('login-adm-source');
+        $this->load->view('login-color-admin');
+//        $this->load->view('login-adm-source');
     }
 
 }

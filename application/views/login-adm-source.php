@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if !IE]><!-->
 <html lang="en">
-    <!--<![endif]-->
     <head>
         <meta charset="utf-8" />
         <title>Source Admin | Login Page</title>
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
         <meta content="" name="description" />
         <meta content="" name="author" />
-
         <!-- ================== BEGIN BASE CSS STYLE ================== -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,300,700" rel="stylesheet" id="fontFamilySrc" />
         <link href="../assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
@@ -18,14 +14,23 @@
         <link href="../assets/css/animate.min.css" rel="stylesheet" />
         <link href="../assets/css/style.min.css" rel="stylesheet" />
         <!-- ================== END BASE CSS STYLE ================== -->
-
         <!-- ================== BEGIN BASE JS ================== -->
         <script src="../assets/plugins/pace/pace.min.js"></script>
         <!-- ================== END BASE JS ================== -->
-
-        <!--[if lt IE 9]>
-            <script src="../assets/crossbrowserjs/excanvas.min.js"></script>
-        <![endif]-->
+        <style>
+            #page-container{
+                background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200');
+                background-size: cover;
+                background-repeat: no-repeat;
+                /*transform:scaleX(-1);*/
+            }
+            #custom{
+                background-color: rgba(255,255,255,0.5);
+                width: 480px;
+                height: 100vh;
+                float: right;
+            }
+        </style>
     </head>
     <body class="pace-top">
         <!-- begin #page-loader -->
@@ -35,40 +40,45 @@
         <!-- begin #page-container -->
         <div id="page-container" class="fade page-container">
             <!-- begin login -->
-            <div class="login">
-                <!-- begin login-brand -->
-                <div class="login-brand bg-grey text-white">
-                    <img src="<?php echo base_url('assets/gambar/') ?>Logo Smart Fishing.png" height="36" class="pull-right" alt="" />
-                    <?php echo $this->config->item("app_name") ?>
-                </div>
-                <!-- end login-brand -->
-                <!-- begin login-content -->
-                <div class="login-content">
-                    <?php if ($this->input->post('login')) { ?>
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h4><i class="icon fa fa-ban"></i> Login Gagal</h4>
-                            Username/ password salah
-                        </div>
-                    <?php } ?>
-                    <h4 class="text-center m-t-0 m-b-20">Log in</h4>
-                    <form method="POST" name="login_form" class="form-input-flat">
-                        <div class="form-group">
-                            <input type="text" name="user" value="<?php echo $this->input->post('user') ?>" class="form-control input-lg" placeholder="Username" required=""/>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="pass" class="form-control input-lg" placeholder="Password"  required=""/>
-                        </div>
-                        <div class="row m-b-20">
-                            <div class="col-lg-12">
-                                <button type="submit" name="login" value="ok" class="btn btn-primary btn-lg btn-block">Log in</button>
+            <div>
+                
+            <div id="custom">
+                <!--<div class="login">-->
+                    <!-- begin login-brand -->
+                    <div class="login-brand">
+                        <img src="<?php echo base_url('assets/gambar/') ?>Logo Smart Fishing.png" height="36" class="pull-right" alt="" />
+                        <?php echo $this->config->item("app_name") ?>
+                    </div>
+                    <!-- end login-brand -->
+                    <!-- begin login-content -->
+                    <div class="login-content">
+                        <?php if ($this->input->post('login')) { ?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h4><i class="icon fa fa-ban"></i> Login Gagal</h4>
+                                Username/ password salah
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- end login-content -->
+                        <?php } ?>
+                        <h4 class="text-center m-t-0 m-b-20">Log in</h4>
+                        <form method="POST" name="login_form" class="form-input-flat">
+                            <div class="form-group">
+                                <input type="text" name="user" value="<?php echo $this->input->post('user') ?>" class="form-control input-lg" placeholder="Username" required=""/>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="pass" class="form-control input-lg" placeholder="Password"  required=""/>
+                            </div>
+                            <div class="row m-b-20">
+                                <div class="col-lg-12">
+                                    <button type="submit" name="login" value="ok" class="btn btn-primary btn-lg btn-block">Log in</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end login-content -->
+                <!--</div>-->
+                <!-- end login -->
             </div>
-            <!-- end login -->
+            </div>
         </div>
         <!-- end page container -->
 
