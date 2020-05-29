@@ -32,7 +32,7 @@
             <div class="login login-with-news-feed">
                 <!-- begin news-feed -->
                 <div class="news-feed">
-                    <div class="news-image" style="background-image: url('https://seantheme.com/color-admin/admin/assets/img/login-bg/login-bg-11.jpg')"></div>
+                    <div class="news-image" style="background-image: url('<?php echo base_url('assets/gambar/')?>login-bg-11.jpg')"></div>
                     <div class="news-caption">
                         <h4 class="caption-title"><b>Smart Fishing Jatim</b></h4>
                         <p>Aplikasi dan Sistem Informasi untuk Perencanaan Perikanan Jawa Timur</p>
